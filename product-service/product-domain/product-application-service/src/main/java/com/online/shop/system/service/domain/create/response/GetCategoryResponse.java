@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.UUID;
+
 @Getter
 @AllArgsConstructor
 @Builder
-public class CreateCategoryResponse {
-    private final Integer categoryID;
+public class GetCategoryResponse {
+    private final UUID categoryID;
+    private final String name;
 }

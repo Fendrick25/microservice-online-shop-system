@@ -1,19 +1,19 @@
 package com.online.shop.system.service.domain.create;
 
-import com.online.shop.system.product.service.domain.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
-@Builder
 @AllArgsConstructor
-public class CreateProduct {
-
+@Builder
+public class UpdateProduct {
+    @NotNull
+    private final UUID productID;
     @NotNull
     private final String name;
     @NotNull
@@ -22,6 +22,4 @@ public class CreateProduct {
     private final BigDecimal price;
     @NotNull
     private final int quantity;
-    @NotNull
-    private final Category category;
 }

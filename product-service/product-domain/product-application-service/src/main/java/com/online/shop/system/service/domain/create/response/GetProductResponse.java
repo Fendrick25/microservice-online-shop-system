@@ -1,27 +1,26 @@
-package com.online.shop.system.service.domain.create;
+package com.online.shop.system.service.domain.create.response;
 
 import com.online.shop.system.product.service.domain.entity.Category;
+import com.online.shop.system.product.service.domain.valueobject.ProductStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
-@Builder
 @AllArgsConstructor
-public class CreateProduct {
-
-    @NotNull
+@Builder
+public class GetProductResponse {
+    private UUID productID;
     private final String name;
-    @NotNull
     private final String description;
-    @NotNull
     private final BigDecimal price;
-    @NotNull
     private final int quantity;
-    @NotNull
+    private ProductStatus productStatus;
+    private final double rating;
+    private final int soldAmount;
+    private String imageUrl;
     private final Category category;
 }

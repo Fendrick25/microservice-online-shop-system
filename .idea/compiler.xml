@@ -8,12 +8,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="product-application-service" />
         <module name="product-domain-core" />
+        <module name="product-dataaccess" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="product-application-service" options="-parameters" />
+      <module name="product-dataaccess" options="-parameters" />
       <module name="product-domain" options="" />
       <module name="product-domain-core" options="-parameters" />
       <module name="product-service" options="" />

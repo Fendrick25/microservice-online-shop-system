@@ -1,15 +1,32 @@
 package com.online.shop.system.service.domain.mapper;
 
 import com.online.shop.system.product.service.domain.entity.Category;
-import com.online.shop.system.service.domain.create.response.CreateCategoryResponse;
+import com.online.shop.system.service.domain.create.UpdateCategory;
+import com.online.shop.system.service.domain.create.response.CategoryIDResponse;
+import com.online.shop.system.service.domain.create.response.GetCategoryResponse;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryDataMapper {
 
-    public CreateCategoryResponse categoryToCreateCategoryResponse(Category category){
-        return CreateCategoryResponse.builder()
+    public CategoryIDResponse categoryToCreateCategoryIDResponse(Category category){
+        return CategoryIDResponse.builder()
                 .categoryID(category.getCategoryID())
                 .build();
     }
+
+    public Category updateCategoryToCategory(UpdateCategory updateCategory){
+        return Category.builder()
+                .categoryID(updateCategory.getCategoryID())
+                .name(updateCategory.getName())
+                .build();
+    }
+
+    public GetCategoryResponse categoryToGetCategoryResponse(Category category){
+        return GetCategoryResponse.builder()
+                .categoryID(category.getCategoryID())
+                .name(category.getName())
+                .build();
+    }
+
 }

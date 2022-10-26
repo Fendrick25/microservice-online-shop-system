@@ -1,5 +1,6 @@
 package com.online.shop.system.product.service.domain.entity;
 
+import com.online.shop.system.product.service.domain.valueobject.ProductStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class Product {
     private final String description;
     private final BigDecimal price;
     private final int quantity;
+    private ProductStatus productStatus;
     private final double rating;
     private final int soldAmount;
     private String imageUrl;
@@ -23,6 +25,12 @@ public class Product {
 
     public void initializeProduct(){
         productID = UUID.randomUUID();
+        productStatus = ProductStatus.NOT_ACTIVE;
         imageUrl = "default image url";
+    }
+
+    public void validateUpdateProduct(){
+        if(quantity <= 0)
+            productStatus = ProductStatus.NOT_ACTIVE;
     }
 }

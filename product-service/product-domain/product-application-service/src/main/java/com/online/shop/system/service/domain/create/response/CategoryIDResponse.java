@@ -9,6 +9,6 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class CreateProductResponse {
-    private final UUID productID;
+public class CategoryIDResponse {
+    private final UUID categoryID;
 }
