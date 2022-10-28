@@ -8,12 +8,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>infrastructure</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>product-domain</module>
-        <module>product-dataaccess</module>
-        <module>product-application</module>
+        <module>kafka</module>
     </modules>
-    <artifactId>product-service</artifactId>
 
 </project>
