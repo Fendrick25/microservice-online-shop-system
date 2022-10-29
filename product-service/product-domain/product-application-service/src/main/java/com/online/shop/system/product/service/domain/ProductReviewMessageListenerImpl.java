@@ -15,7 +15,7 @@ public class ProductReviewMessageListenerImpl implements ProductReviewMessageLis
     private final ProductRepository productRepository;
     @Override
     public void productReviewCreated(ProductRating productRating) {
-        productRepository.saveProductRating(productRating.getProductID(), productRating.getRating());
+        productRepository.saveProductRating(productRating);
         log.info("Product rating saved for product id: {}", productRating.getProductID());
     }
 }

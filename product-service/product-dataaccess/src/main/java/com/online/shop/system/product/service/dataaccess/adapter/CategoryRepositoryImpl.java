@@ -8,6 +8,7 @@ import com.online.shop.system.product.service.domain.entity.Category;
 import com.online.shop.system.product.service.domain.ports.output.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,6 +26,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
+    @Transactional
     public Category updateCategory(Category category) {
         CategoryEntity categoryEntity = findCategory(category.getCategoryID());
         categoryEntity.setName(category.getName());

@@ -1,0 +1,20 @@
+{
+  "namespace": "com.online.shop.system.kafka.avro.model",
+  "type": "record",
+  "name": "ProductRatingAvroModel",
+  "fields": [
+    {
+      "name": "productID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "rating",
+      "type": {
+        "type": "int"
+      }
+    }
+  ]
+}

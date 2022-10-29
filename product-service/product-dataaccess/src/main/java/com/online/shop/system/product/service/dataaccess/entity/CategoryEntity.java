@@ -18,6 +18,6 @@ import java.util.UUID;
 public class CategoryEntity {
 
     @Id
-    private UUID categoryID;
+    private UUID id;
     private String name;
 }

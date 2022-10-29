@@ -22,7 +22,6 @@ public class ProductController {
 
     private final ProductApplicationService productApplicationService;
 
-
     @PostMapping
     public ResponseEntity<Data<ProductIDResponse>> createProduct(@RequestBody CreateProduct createProduct){
         return new ResponseEntity<>(new Data<>(productApplicationService.createProduct(createProduct)), HttpStatus.CREATED);
@@ -48,16 +47,16 @@ public class ProductController {
         return new ResponseEntity<>(new Data<>(productApplicationService.getAllProduct()), HttpStatus.OK);
     }
 
-    @GetMapping("/{categoryID}")
+    @GetMapping("/category/{categoryID}")
     public ResponseEntity<PagingResponse> getProductByCategory(@PathVariable("categoryID") UUID categoryID,
-                                                               @RequestParam(defaultValue = "0") int page,
+                                                               @RequestParam(defaultValue = "1") int page,
                                                                @RequestParam(defaultValue = "10") int size){
         return new ResponseEntity<>(productApplicationService.getProductByCategory(categoryID, page, size), HttpStatus.OK);
     }
 
     @GetMapping("/search/{productName}")
     public ResponseEntity<PagingResponse> searchProduct(@PathVariable("productName") String productName,
-                                                        @RequestParam(defaultValue = "0") int page,
+                                                        @RequestParam(defaultValue = "1") int page,
                                                         @RequestParam(defaultValue = "10") int size){
         return new ResponseEntity<>(productApplicationService.searchProduct(productName, page, size), HttpStatus.OK);
     }

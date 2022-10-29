@@ -65,35 +65,12 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
 
     @Override
     public PagingResponse getProductByCategory(UUID categoryID, int page, int size) {
-        List<ProductOverview> productOverviews = productRepository.getProductByCategory(categoryID, page, size).stream()
-                .map(productDataMapper::productToProductOverview).toList();
-
-        return PagingResponse.builder()
-                .data(Data.builder()
-                        .data(productOverviews)
-                        .build())
-                .size(size)
-                .total(productOverviews.size())
-                .totalPages((int)Math.ceil((float)productOverviews.size() / size))
-                .currentPage(page)
-                .build();
+        return productRepository.getProductByCategory(categoryID, page, size);
     }
 
     @Override
     public PagingResponse searchProduct(String productName, int page, int size) {
-        List<ProductOverview> productOverviews =  productRepository.searchProduct(productName, page, size).stream()
-                .map(productDataMapper::productToProductOverview)
-                .collect(Collectors.toList());
-
-        return PagingResponse.builder()
-                .data(Data.builder()
-                        .data(productOverviews)
-                        .build())
-                .size(size)
-                .total(productOverviews.size())
-                .totalPages((int)Math.ceil((float)productOverviews.size() / size))
-                .currentPage(page)
-                .build();
+        return productRepository.searchProduct(productName, page, size);
     }
 
 

@@ -13,6 +13,8 @@
         <module>product-domain</module>
         <module>product-dataaccess</module>
         <module>product-application</module>
+        <module>product-container</module>
+        <module>product-messaging</module>
     </modules>
     <artifactId>product-service</artifactId>
 

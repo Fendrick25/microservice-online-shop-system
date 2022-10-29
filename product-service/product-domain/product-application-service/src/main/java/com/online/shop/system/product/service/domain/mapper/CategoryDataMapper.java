@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategoryDataMapper {
 
-    public CategoryIDResponse categoryToCreateCategoryIDResponse(Category category){
+    public CategoryIDResponse categoryToCategoryIDResponse(Category category){
         return CategoryIDResponse.builder()
                 .categoryID(category.getCategoryID())
                 .build();

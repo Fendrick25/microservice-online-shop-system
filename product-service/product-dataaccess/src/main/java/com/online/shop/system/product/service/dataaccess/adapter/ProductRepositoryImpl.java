@@ -1,11 +1,16 @@
 package com.online.shop.system.product.service.dataaccess.adapter;
 
+import com.online.shop.system.product.service.dataaccess.entity.CategoryEntity;
 import com.online.shop.system.product.service.dataaccess.entity.ProductEntity;
 import com.online.shop.system.product.service.dataaccess.entity.ProductRatingEntity;
 import com.online.shop.system.product.service.dataaccess.exception.ResourceNotFoundException;
 import com.online.shop.system.product.service.dataaccess.mapper.ProductDataAccessMapper;
+import com.online.shop.system.product.service.dataaccess.repository.CategoryJpaRepository;
 import com.online.shop.system.product.service.dataaccess.repository.ProductJpaRepository;
 import com.online.shop.system.product.service.dataaccess.repository.ProductRatingJpaRepository;
+import com.online.shop.system.product.service.domain.dto.create.response.Data;
+import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
+import com.online.shop.system.product.service.domain.dto.message.ProductRating;
 import com.online.shop.system.product.service.domain.entity.Product;
 import com.online.shop.system.product.service.domain.ports.output.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -59,26 +65,36 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public List<Product> getProductByCategory(UUID categoryID, int page, int size) {
-        Pageable paging = PageRequest.of(page, size);
-        Page<ProductEntity> pageProducts = productJpaRepository.findByCategoryID(categoryID, paging);
-        return pageProducts.getContent().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Product> searchProduct(String productName, int page, int size) {
-        Pageable paging = PageRequest.of(page, size);
-        Page<ProductEntity> pageProducts = productJpaRepository.findByNameContaining(productName, paging);
-        return pageProducts.getContent().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList());
-    }
-
-    @Override
-    public void saveProductRating(UUID productID, int rating) {
-        ProductRatingEntity productRatingEntity = ProductRatingEntity.builder()
-                .rating(rating)
-                .product(find(productID))
+    public PagingResponse getProductByCategory(UUID categoryID, int page, int size) {
+        Pageable paging = PageRequest.of(page - 1, size);
+        Page<ProductEntity> pageProducts = productJpaRepository.findByCategoryId(categoryID, paging);
+        return PagingResponse.builder()
+                .data(new Data<>(pageProducts.getContent().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList())))
+                .currentPage(pageProducts.getNumber() + 1)
+                .size(pageProducts.getSize())
+                .total(((int) pageProducts.getTotalElements()))
+                .totalPages(pageProducts.getTotalPages())
                 .build();
+    }
 
+    @Override
+    public PagingResponse searchProduct(String productName, int page, int size) {
+        Pageable paging = PageRequest.of(page - 1, size);
+        Page<ProductEntity> pageProducts = productJpaRepository.findByNameContaining(productName, paging);
+        return PagingResponse.builder()
+                .data(new Data<>(pageProducts.getContent().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList())))
+                .currentPage(pageProducts.getNumber() + 1)
+                .size(pageProducts.getSize())
+                .total(((int) pageProducts.getTotalElements()))
+                .totalPages(pageProducts.getTotalPages())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public void saveProductRating(ProductRating productRating) {
+        ProductRatingEntity productRatingEntity = productDataAccessMapper.productRatingToProductRatingEntity(productRating);
+        productRatingEntity.setProduct(find(productRating.getProductID()));
         productRatingJpaRepository.save(productRatingEntity);
     }
 

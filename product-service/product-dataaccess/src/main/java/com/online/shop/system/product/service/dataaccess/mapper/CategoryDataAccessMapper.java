@@ -9,14 +9,14 @@ public class CategoryDataAccessMapper {
 
     public CategoryEntity categoryToCategoryEntity(Category category){
         return CategoryEntity.builder()
-                .categoryID(category.getCategoryID())
+                .id(category.getCategoryID())
                 .name(category.getName())
                 .build();
     }
 
     public Category categoryEntityToCategory(CategoryEntity categoryEntity){
         return Category.builder()
-                .categoryID(categoryEntity.getCategoryID())
+                .categoryID(categoryEntity.getId())
                 .name(categoryEntity.getName())
                 .build();
     }

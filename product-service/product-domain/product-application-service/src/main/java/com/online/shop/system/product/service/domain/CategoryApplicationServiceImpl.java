@@ -32,14 +32,14 @@ public class CategoryApplicationServiceImpl implements CategoryApplicationServic
         Category category = categoryDomainService.validateCategory(Category.builder()
                 .name(createCategory.getName()).build());
         log.info("Category with id: {} created", category.getCategoryID());
-        return categoryDataMapper.categoryToCreateCategoryIDResponse(categoryRepository.createCategory(category));
+        return categoryDataMapper.categoryToCategoryIDResponse(categoryRepository.createCategory(category));
     }
 
     @Override
     public CategoryIDResponse updateCategory(UpdateCategory updateCategory) {
         Category category = categoryRepository.updateCategory(categoryDataMapper.updateCategoryToCategory(updateCategory));
         log.info("Category with id: {} updated", category.getCategoryID());
-        return categoryDataMapper.categoryToCreateCategoryIDResponse(category);
+        return categoryDataMapper.categoryToCategoryIDResponse(category);
     }
 
     @Override

@@ -9,7 +9,6 @@ public interface CategoryRepository {
     Category createCategory(Category category);
     Category updateCategory(Category category);
     void deleteCategory(UUID categoryID);
-
     Category getCategory(UUID categoryID);
     List<Category> getAllCategory();
 }

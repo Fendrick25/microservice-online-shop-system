@@ -1,5 +1,7 @@
 package com.online.shop.system.product.service.domain.ports.output.repository;
 
+import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
+import com.online.shop.system.product.service.domain.dto.message.ProductRating;
 import com.online.shop.system.product.service.domain.entity.Product;
 
 import java.util.List;
@@ -11,8 +13,8 @@ public interface ProductRepository {
     void deleteProduct(UUID productID);
     Product getProduct(UUID productID);
     List<Product> getAllProduct();
-    List<Product> getProductByCategory(UUID categoryID, int page, int size);
-    List<Product> searchProduct(String productName, int page, int size);
-    void saveProductRating(UUID productID, int rating);
+    PagingResponse getProductByCategory(UUID categoryID, int page, int size);
+    PagingResponse searchProduct(String productName, int page, int size);
+    void saveProductRating(ProductRating productRating);
 
 }
