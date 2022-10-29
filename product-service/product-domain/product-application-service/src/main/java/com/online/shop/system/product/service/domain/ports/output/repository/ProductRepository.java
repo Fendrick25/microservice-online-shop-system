@@ -1,7 +1,6 @@
 package com.online.shop.system.product.service.domain.ports.output.repository;
 
 import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
-import com.online.shop.system.product.service.domain.dto.message.ProductRating;
 import com.online.shop.system.product.service.domain.entity.Product;
 
 import java.util.List;
@@ -15,6 +14,5 @@ public interface ProductRepository {
     List<Product> getAllProduct();
     PagingResponse getProductByCategory(UUID categoryID, int page, int size);
     PagingResponse searchProduct(String productName, int page, int size);
-    void saveProductRating(ProductRating productRating);
 
 }

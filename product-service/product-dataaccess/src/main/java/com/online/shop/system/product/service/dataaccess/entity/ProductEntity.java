@@ -35,4 +35,7 @@ public class ProductEntity {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductRatingEntity> ratingLogs;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductReviewEntity> productReviews;
 }

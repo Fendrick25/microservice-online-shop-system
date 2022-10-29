@@ -1,16 +1,12 @@
 package com.online.shop.system.product.service.dataaccess.adapter;
 
-import com.online.shop.system.product.service.dataaccess.entity.CategoryEntity;
 import com.online.shop.system.product.service.dataaccess.entity.ProductEntity;
-import com.online.shop.system.product.service.dataaccess.entity.ProductRatingEntity;
 import com.online.shop.system.product.service.dataaccess.exception.ResourceNotFoundException;
 import com.online.shop.system.product.service.dataaccess.mapper.ProductDataAccessMapper;
-import com.online.shop.system.product.service.dataaccess.repository.CategoryJpaRepository;
 import com.online.shop.system.product.service.dataaccess.repository.ProductJpaRepository;
 import com.online.shop.system.product.service.dataaccess.repository.ProductRatingJpaRepository;
 import com.online.shop.system.product.service.domain.dto.create.response.Data;
 import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
-import com.online.shop.system.product.service.domain.dto.message.ProductRating;
 import com.online.shop.system.product.service.domain.entity.Product;
 import com.online.shop.system.product.service.domain.ports.output.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +35,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @Transactional
     public Product updateProduct(Product product) {
         ProductEntity productEntity = find(product.getProductID());
         productEntity.setName(product.getName());
@@ -90,13 +87,6 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .build();
     }
 
-    @Override
-    @Transactional
-    public void saveProductRating(ProductRating productRating) {
-        ProductRatingEntity productRatingEntity = productDataAccessMapper.productRatingToProductRatingEntity(productRating);
-        productRatingEntity.setProduct(find(productRating.getProductID()));
-        productRatingJpaRepository.save(productRatingEntity);
-    }
 
     private ProductEntity find(UUID productID){
         return productJpaRepository.findById(productID).orElseThrow(() -> new ResourceNotFoundException("Product not found"));

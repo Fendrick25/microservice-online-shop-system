@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>product-review-domain</module>
+        <module>product-review-dataaccess</module>
     </modules>
     <artifactId>product-review-service</artifactId>
 

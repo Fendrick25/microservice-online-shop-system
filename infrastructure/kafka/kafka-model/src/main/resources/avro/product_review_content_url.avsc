@@ -1,0 +1,33 @@
+{
+  "namespace": "com.online.shop.system.kafka.avro.model",
+  "type": "record",
+  "name": "ProductReviewContentUrlAvroModel",
+  "fields": [
+    {
+      "name": "productID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "imageUrls",
+      "type": {
+        "type": "array",
+        "items":{
+          "type":"string"
+        }
+      }
+    },
+    {
+      "name": "videoUrls",
+      "type": {
+        "type": "array",
+        "items":{
+          "type":"string"
+        }
+      }
+    }
+
+  ]
+}

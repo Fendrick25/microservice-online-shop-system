@@ -2,7 +2,6 @@ package com.online.shop.system.product.service.dataaccess.mapper;
 
 import com.online.shop.system.product.service.dataaccess.entity.ProductEntity;
 import com.online.shop.system.product.service.dataaccess.entity.ProductRatingEntity;
-import com.online.shop.system.product.service.domain.dto.message.ProductRating;
 import com.online.shop.system.product.service.domain.entity.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -43,9 +42,4 @@ public class ProductDataAccessMapper {
                 .build();
     }
 
-    public ProductRatingEntity productRatingToProductRatingEntity(ProductRating productRating){
-        return ProductRatingEntity.builder()
-                .rating(productRating.getRating())
-                .build();
-    }
 }
