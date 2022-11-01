@@ -1,10 +1,12 @@
 package com.online.shop.system.product.service.dataaccess.entity;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -23,8 +25,8 @@ public class ProductReviewEntity {
     private String username;
     private int rating;
     private String description;
-    private List<String> imageUrls;
-    private List<String> videoUrls;
+    private String imageUrl;
+    private String videoUrl;
     private ZonedDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)

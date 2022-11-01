@@ -44,8 +44,8 @@ public class ProductReviewDataMapper {
                 .rating(productReview.getRating())
                 .userID(productReview.getUserID())
                 .username(productReview.getUsername())
-                .imageUrls(productReview.getImageUrls())
-                .videoUrls(productReview.getVideoUrls())
+                .imageUrl(productReview.getImageUrl())
+                .videoUrl(productReview.getVideoUrl())
                 .createdAt(productReview.getCreatedAt())
                 .build();
     }

@@ -7,8 +7,9 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class CreateCategory {
 
     @NotNull
-    private final String name;
+    private String name;
 }

@@ -23,7 +23,7 @@ public class ProductReviewContentUrlKafkaListener implements KafkaConsumer<Produ
     private final ProductMessagingDataMapper productMessagingDataMapper;
 
     @Override
-    @KafkaListener(id = "${kafka-consumer-config.product-review-group-id}", topics = "${product-service.product-review-topic-name}")
+    @KafkaListener(id = "${kafka-consumer-config.product-review-content-group-id}", topics = "${product-service.product-review-content-topic-name}")
     public void receive(@Payload List<ProductReviewContentUrlAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,

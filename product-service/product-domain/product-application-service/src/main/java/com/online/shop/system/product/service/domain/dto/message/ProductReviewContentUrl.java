@@ -11,8 +11,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class ProductReviewContentUrl {
-
-    private final UUID productID;
-    private List<String> imagesUrl;
-    private List<String> videosUrl;
+    private Integer productReviewID;
+    private UUID productID;
+    private String imageUrl;
+    private String videoUrl;
 }

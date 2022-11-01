@@ -10,7 +10,8 @@
     <modules>
         <module>product-service</module>
         <module>infrastructure</module>
-        <module>product-review-service</module>
+        <module>product-review-content-service</module>
+        <module>user-service</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -26,7 +27,8 @@
         <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
         <spring-kafka.version>2.9.0</spring-kafka.version>
         <kafka-avro-serializer.version>7.2.2</kafka-avro-serializer.version>
-        <avro.version>1.11.1</avro.version>
+        <avro.version>1.11.0</avro.version>
+        <hibernate-types-52.version>2.19.2</hibernate-types-52.version>
     </properties>
 
     <dependencies>
@@ -70,12 +72,27 @@
             </dependency>
             <dependency>
                 <groupId>com.online.shop.system</groupId>
-                <artifactId>product-review-domain-core</artifactId>
+                <artifactId>product-review-content-domain-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.online.shop.system</groupId>
-                <artifactId>product-review-application-service</artifactId>
+                <artifactId>product-review-content-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>product-review-content-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>product-review-content-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>product-review-content-messaging</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -97,6 +114,11 @@
                 <groupId>com.online.shop.system</groupId>
                 <artifactId>kafka-producer</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladmihalcea</groupId>
+                <artifactId>hibernate-types-52</artifactId>
+                <version>${hibernate-types-52.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

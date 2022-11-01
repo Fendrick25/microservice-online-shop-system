@@ -18,7 +18,7 @@ import java.util.UUID;
 public class ProductEntity {
 
     @Id
-    private UUID productID;
+    private UUID id;
     private String name;
     private String description;
     private BigDecimal price;

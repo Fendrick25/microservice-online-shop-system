@@ -26,7 +26,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     private final ProductJpaRepository productJpaRepository;
 
-    private final ProductRatingJpaRepository productRatingJpaRepository;
     private final ProductDataAccessMapper productDataAccessMapper;
 
     @Override

@@ -14,22 +14,19 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 8424923076912118256L;
+  private static final long serialVersionUID = 4535348212349961263L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ProductReviewContentUrlAvroModel\",\"namespace\":\"com.online.shop.system.kafka.avro.model\",\"fields\":[{\"name\":\"productID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"imageUrls\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"videoUrls\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ProductReviewContentUrlAvroModel\",\"namespace\":\"com.online.shop.system.kafka.avro.model\",\"fields\":[{\"name\":\"productReviewID\",\"type\":\"int\"},{\"name\":\"productID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"imageUrl\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"videoUrl\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
-  static {
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.UUIDConversion());
-  }
 
   private static final BinaryMessageEncoder<ProductReviewContentUrlAvroModel> ENCODER =
-      new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
+      new BinaryMessageEncoder<ProductReviewContentUrlAvroModel>(MODEL$, SCHEMA$);
 
   private static final BinaryMessageDecoder<ProductReviewContentUrlAvroModel> DECODER =
-      new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
+      new BinaryMessageDecoder<ProductReviewContentUrlAvroModel>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
@@ -53,7 +50,7 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
   public static BinaryMessageDecoder<ProductReviewContentUrlAvroModel> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
+    return new BinaryMessageDecoder<ProductReviewContentUrlAvroModel>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
@@ -76,9 +73,10 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
     return DECODER.decode(b);
   }
 
-  private java.util.UUID productID;
-  private java.util.List<java.lang.String> imageUrls;
-  private java.util.List<java.lang.String> videoUrls;
+  private int productReviewID;
+  private java.lang.String productID;
+  private java.lang.String imageUrl;
+  private java.lang.String videoUrl;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -89,36 +87,35 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
 
   /**
    * All-args constructor.
+   * @param productReviewID The new value for productReviewID
    * @param productID The new value for productID
-   * @param imageUrls The new value for imageUrls
-   * @param videoUrls The new value for videoUrls
+   * @param imageUrl The new value for imageUrl
+   * @param videoUrl The new value for videoUrl
    */
-  public ProductReviewContentUrlAvroModel(java.util.UUID productID, java.util.List<java.lang.String> imageUrls, java.util.List<java.lang.String> videoUrls) {
+  public ProductReviewContentUrlAvroModel(java.lang.Integer productReviewID, java.lang.String productID, java.lang.String imageUrl, java.lang.String videoUrl) {
+    this.productReviewID = productReviewID;
     this.productID = productID;
-    this.imageUrls = imageUrls;
-    this.videoUrls = videoUrls;
+    this.imageUrl = imageUrl;
+    this.videoUrl = videoUrl;
   }
 
-  @Override
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
-
-  @Override
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
-
   // Used by DatumWriter.  Applications should not call.
-  @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return productID;
-    case 1: return imageUrls;
-    case 2: return videoUrls;
+    case 0: return productReviewID;
+    case 1: return productID;
+    case 2: return imageUrl;
+    case 3: return videoUrl;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
 
   private static final org.apache.avro.Conversion<?>[] conversions =
       new org.apache.avro.Conversion<?>[] {
-      new org.apache.avro.Conversions.UUIDConversion(),
+      null,
+      null,
       null,
       null,
       null
@@ -130,22 +127,39 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
   }
 
   // Used by DatumReader.  Applications should not call.
-  @Override
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: productID = (java.util.UUID)value$; break;
-    case 1: imageUrls = (java.util.List<java.lang.String>)value$; break;
-    case 2: videoUrls = (java.util.List<java.lang.String>)value$; break;
+    case 0: productReviewID = (java.lang.Integer)value$; break;
+    case 1: productID = value$ != null ? value$.toString() : null; break;
+    case 2: imageUrl = value$ != null ? value$.toString() : null; break;
+    case 3: videoUrl = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  /**
+   * Gets the value of the 'productReviewID' field.
+   * @return The value of the 'productReviewID' field.
+   */
+  public int getProductReviewID() {
+    return productReviewID;
+  }
+
+
+  /**
+   * Sets the value of the 'productReviewID' field.
+   * @param value the value to set.
+   */
+  public void setProductReviewID(int value) {
+    this.productReviewID = value;
   }
 
   /**
    * Gets the value of the 'productID' field.
    * @return The value of the 'productID' field.
    */
-  public java.util.UUID getProductID() {
+  public java.lang.String getProductID() {
     return productID;
   }
 
@@ -154,42 +168,42 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
    * Sets the value of the 'productID' field.
    * @param value the value to set.
    */
-  public void setProductID(java.util.UUID value) {
+  public void setProductID(java.lang.String value) {
     this.productID = value;
   }
 
   /**
-   * Gets the value of the 'imageUrls' field.
-   * @return The value of the 'imageUrls' field.
+   * Gets the value of the 'imageUrl' field.
+   * @return The value of the 'imageUrl' field.
    */
-  public java.util.List<java.lang.String> getImageUrls() {
-    return imageUrls;
+  public java.lang.String getImageUrl() {
+    return imageUrl;
   }
 
 
   /**
-   * Sets the value of the 'imageUrls' field.
+   * Sets the value of the 'imageUrl' field.
    * @param value the value to set.
    */
-  public void setImageUrls(java.util.List<java.lang.String> value) {
-    this.imageUrls = value;
+  public void setImageUrl(java.lang.String value) {
+    this.imageUrl = value;
   }
 
   /**
-   * Gets the value of the 'videoUrls' field.
-   * @return The value of the 'videoUrls' field.
+   * Gets the value of the 'videoUrl' field.
+   * @return The value of the 'videoUrl' field.
    */
-  public java.util.List<java.lang.String> getVideoUrls() {
-    return videoUrls;
+  public java.lang.String getVideoUrl() {
+    return videoUrl;
   }
 
 
   /**
-   * Sets the value of the 'videoUrls' field.
+   * Sets the value of the 'videoUrl' field.
    * @param value the value to set.
    */
-  public void setVideoUrls(java.util.List<java.lang.String> value) {
-    this.videoUrls = value;
+  public void setVideoUrl(java.lang.String value) {
+    this.videoUrl = value;
   }
 
   /**
@@ -233,9 +247,10 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<ProductReviewContentUrlAvroModel>
     implements org.apache.avro.data.RecordBuilder<ProductReviewContentUrlAvroModel> {
 
-    private java.util.UUID productID;
-    private java.util.List<java.lang.String> imageUrls;
-    private java.util.List<java.lang.String> videoUrls;
+    private int productReviewID;
+    private java.lang.String productID;
+    private java.lang.String imageUrl;
+    private java.lang.String videoUrl;
 
     /** Creates a new Builder */
     private Builder() {
@@ -248,17 +263,21 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
      */
     private Builder(com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.productID)) {
-        this.productID = data().deepCopy(fields()[0].schema(), other.productID);
+      if (isValidValue(fields()[0], other.productReviewID)) {
+        this.productReviewID = data().deepCopy(fields()[0].schema(), other.productReviewID);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.imageUrls)) {
-        this.imageUrls = data().deepCopy(fields()[1].schema(), other.imageUrls);
+      if (isValidValue(fields()[1], other.productID)) {
+        this.productID = data().deepCopy(fields()[1].schema(), other.productID);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.videoUrls)) {
-        this.videoUrls = data().deepCopy(fields()[2].schema(), other.videoUrls);
+      if (isValidValue(fields()[2], other.imageUrl)) {
+        this.imageUrl = data().deepCopy(fields()[2].schema(), other.imageUrl);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
+      }
+      if (isValidValue(fields()[3], other.videoUrl)) {
+        this.videoUrl = data().deepCopy(fields()[3].schema(), other.videoUrl);
+        fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
     }
 
@@ -268,25 +287,68 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
      */
     private Builder(com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.productID)) {
-        this.productID = data().deepCopy(fields()[0].schema(), other.productID);
+      if (isValidValue(fields()[0], other.productReviewID)) {
+        this.productReviewID = data().deepCopy(fields()[0].schema(), other.productReviewID);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.imageUrls)) {
-        this.imageUrls = data().deepCopy(fields()[1].schema(), other.imageUrls);
+      if (isValidValue(fields()[1], other.productID)) {
+        this.productID = data().deepCopy(fields()[1].schema(), other.productID);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.videoUrls)) {
-        this.videoUrls = data().deepCopy(fields()[2].schema(), other.videoUrls);
+      if (isValidValue(fields()[2], other.imageUrl)) {
+        this.imageUrl = data().deepCopy(fields()[2].schema(), other.imageUrl);
         fieldSetFlags()[2] = true;
       }
+      if (isValidValue(fields()[3], other.videoUrl)) {
+        this.videoUrl = data().deepCopy(fields()[3].schema(), other.videoUrl);
+        fieldSetFlags()[3] = true;
+      }
+    }
+
+    /**
+      * Gets the value of the 'productReviewID' field.
+      * @return The value.
+      */
+    public int getProductReviewID() {
+      return productReviewID;
+    }
+
+
+    /**
+      * Sets the value of the 'productReviewID' field.
+      * @param value The value of 'productReviewID'.
+      * @return This builder.
+      */
+    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder setProductReviewID(int value) {
+      validate(fields()[0], value);
+      this.productReviewID = value;
+      fieldSetFlags()[0] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'productReviewID' field has been set.
+      * @return True if the 'productReviewID' field has been set, false otherwise.
+      */
+    public boolean hasProductReviewID() {
+      return fieldSetFlags()[0];
+    }
+
+
+    /**
+      * Clears the value of the 'productReviewID' field.
+      * @return This builder.
+      */
+    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder clearProductReviewID() {
+      fieldSetFlags()[0] = false;
+      return this;
     }
 
     /**
       * Gets the value of the 'productID' field.
       * @return The value.
       */
-    public java.util.UUID getProductID() {
+    public java.lang.String getProductID() {
       return productID;
     }
 
@@ -296,10 +358,10 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
       * @param value The value of 'productID'.
       * @return This builder.
       */
-    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder setProductID(java.util.UUID value) {
-      validate(fields()[0], value);
+    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder setProductID(java.lang.String value) {
+      validate(fields()[1], value);
       this.productID = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -308,7 +370,7 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
       * @return True if the 'productID' field has been set, false otherwise.
       */
     public boolean hasProductID() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[1];
     }
 
 
@@ -318,87 +380,87 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
       */
     public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder clearProductID() {
       productID = null;
-      fieldSetFlags()[0] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'imageUrls' field.
-      * @return The value.
-      */
-    public java.util.List<java.lang.String> getImageUrls() {
-      return imageUrls;
-    }
-
-
-    /**
-      * Sets the value of the 'imageUrls' field.
-      * @param value The value of 'imageUrls'.
-      * @return This builder.
-      */
-    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder setImageUrls(java.util.List<java.lang.String> value) {
-      validate(fields()[1], value);
-      this.imageUrls = value;
-      fieldSetFlags()[1] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'imageUrls' field has been set.
-      * @return True if the 'imageUrls' field has been set, false otherwise.
-      */
-    public boolean hasImageUrls() {
-      return fieldSetFlags()[1];
-    }
-
-
-    /**
-      * Clears the value of the 'imageUrls' field.
-      * @return This builder.
-      */
-    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder clearImageUrls() {
-      imageUrls = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'videoUrls' field.
+      * Gets the value of the 'imageUrl' field.
       * @return The value.
       */
-    public java.util.List<java.lang.String> getVideoUrls() {
-      return videoUrls;
+    public java.lang.String getImageUrl() {
+      return imageUrl;
     }
 
 
     /**
-      * Sets the value of the 'videoUrls' field.
-      * @param value The value of 'videoUrls'.
+      * Sets the value of the 'imageUrl' field.
+      * @param value The value of 'imageUrl'.
       * @return This builder.
       */
-    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder setVideoUrls(java.util.List<java.lang.String> value) {
+    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder setImageUrl(java.lang.String value) {
       validate(fields()[2], value);
-      this.videoUrls = value;
+      this.imageUrl = value;
       fieldSetFlags()[2] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'videoUrls' field has been set.
-      * @return True if the 'videoUrls' field has been set, false otherwise.
+      * Checks whether the 'imageUrl' field has been set.
+      * @return True if the 'imageUrl' field has been set, false otherwise.
       */
-    public boolean hasVideoUrls() {
+    public boolean hasImageUrl() {
       return fieldSetFlags()[2];
     }
 
 
     /**
-      * Clears the value of the 'videoUrls' field.
+      * Clears the value of the 'imageUrl' field.
       * @return This builder.
       */
-    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder clearVideoUrls() {
-      videoUrls = null;
+    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder clearImageUrl() {
+      imageUrl = null;
       fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'videoUrl' field.
+      * @return The value.
+      */
+    public java.lang.String getVideoUrl() {
+      return videoUrl;
+    }
+
+
+    /**
+      * Sets the value of the 'videoUrl' field.
+      * @param value The value of 'videoUrl'.
+      * @return This builder.
+      */
+    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder setVideoUrl(java.lang.String value) {
+      validate(fields()[3], value);
+      this.videoUrl = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'videoUrl' field has been set.
+      * @return True if the 'videoUrl' field has been set, false otherwise.
+      */
+    public boolean hasVideoUrl() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'videoUrl' field.
+      * @return This builder.
+      */
+    public com.online.shop.system.kafka.avro.model.ProductReviewContentUrlAvroModel.Builder clearVideoUrl() {
+      videoUrl = null;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -407,9 +469,10 @@ public class ProductReviewContentUrlAvroModel extends org.apache.avro.specific.S
     public ProductReviewContentUrlAvroModel build() {
       try {
         ProductReviewContentUrlAvroModel record = new ProductReviewContentUrlAvroModel();
-        record.productID = fieldSetFlags()[0] ? this.productID : (java.util.UUID) defaultValue(fields()[0]);
-        record.imageUrls = fieldSetFlags()[1] ? this.imageUrls : (java.util.List<java.lang.String>) defaultValue(fields()[1]);
-        record.videoUrls = fieldSetFlags()[2] ? this.videoUrls : (java.util.List<java.lang.String>) defaultValue(fields()[2]);
+        record.productReviewID = fieldSetFlags()[0] ? this.productReviewID : (java.lang.Integer) defaultValue(fields()[0]);
+        record.productID = fieldSetFlags()[1] ? this.productID : (java.lang.String) defaultValue(fields()[1]);
+        record.imageUrl = fieldSetFlags()[2] ? this.imageUrl : (java.lang.String) defaultValue(fields()[2]);
+        record.videoUrl = fieldSetFlags()[3] ? this.videoUrl : (java.lang.String) defaultValue(fields()[3]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

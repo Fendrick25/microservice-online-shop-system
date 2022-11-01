@@ -18,7 +18,7 @@ public class GetProductReviewResponse {
     private final String username;
     private final int rating;
     private String description;
-    private List<String> imageUrls;
-    private List<String> videoUrls;
+    private String imageUrl;
+    private String videoUrl;
     private ZonedDateTime createdAt;
 }

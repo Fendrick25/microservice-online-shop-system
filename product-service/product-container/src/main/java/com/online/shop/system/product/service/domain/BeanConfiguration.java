@@ -15,4 +15,9 @@ public class BeanConfiguration {
     public CategoryDomainService categoryDomainService(){
         return new CategoryDomainServiceImpl();
     }
+
+    @Bean
+    public ProductReviewDomainService productReviewDomainService(){
+        return new ProductReviewDomainServiceImpl();
+    }
 }

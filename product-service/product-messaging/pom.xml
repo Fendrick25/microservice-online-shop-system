@@ -17,10 +17,6 @@
         </dependency>
         <dependency>
             <groupId>com.online.shop.system</groupId>
-            <artifactId>kafka-producer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.online.shop.system</groupId>
             <artifactId>kafka-model</artifactId>
         </dependency>
         <dependency>

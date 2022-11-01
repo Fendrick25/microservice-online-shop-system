@@ -5,16 +5,17 @@ import com.online.shop.system.product.service.domain.dto.create.UpdateProduct;
 import com.online.shop.system.product.service.domain.dto.create.response.GetProductResponse;
 import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
 import com.online.shop.system.product.service.domain.dto.create.response.ProductIDResponse;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface ProductApplicationService {
-    ProductIDResponse createProduct(CreateProduct createProduct);
-    ProductIDResponse updateProduct(UpdateProduct updateProduct);
-    ProductIDResponse deleteProduct(UUID productID);
-    GetProductResponse getProduct(UUID productID);
+    ProductIDResponse createProduct(@Validated CreateProduct createProduct);
+    ProductIDResponse updateProduct(@Validated UpdateProduct updateProduct);
+    ProductIDResponse deleteProduct(@Validated UUID productID);
+    GetProductResponse getProduct(@Validated UUID productID);
     List<GetProductResponse> getAllProduct();
-    PagingResponse getProductByCategory(UUID categoryID, int page, int size);
-    PagingResponse searchProduct(String productName, int page, int size);
+    PagingResponse getProductByCategory(@Validated UUID categoryID, int page, int size);
+    PagingResponse searchProduct(@Validated String productName, int page, int size);
 }

@@ -6,7 +6,6 @@ import lombok.Getter;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -20,8 +19,8 @@ public class ProductReview {
     private final String username;
     private final int rating;
     private String description;
-    private List<String> imageUrls;
-    private List<String> videoUrls;
+    private String imageUrl;
+    private String videoUrl;
     private ZonedDateTime createdAt;
 
     public void initializeProductReview(){

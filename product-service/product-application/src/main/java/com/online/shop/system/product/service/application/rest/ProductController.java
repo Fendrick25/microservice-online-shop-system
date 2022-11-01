@@ -54,7 +54,7 @@ public class ProductController {
         return new ResponseEntity<>(productApplicationService.getProductByCategory(categoryID, page, size), HttpStatus.OK);
     }
 
-    @GetMapping("/search/{productName}")
+    @GetMapping("/name/{productName}")
     public ResponseEntity<PagingResponse> searchProduct(@PathVariable("productName") String productName,
                                                         @RequestParam(defaultValue = "1") int page,
                                                         @RequestParam(defaultValue = "10") int size){

@@ -6,7 +6,7 @@ logging:
     com.online.shop.system: DEBUG
 
 product-service:
-  product-review-topic-name: product-review
+  product-review-content-topic-name: product-review-content
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
@@ -37,21 +37,10 @@ kafka-config:
   num-of-partitions: 3
   replication-factor: 3
 
-kafka-producer-config:
-  key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
-  value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
-  compression-type: snappy
-  acks: all
-  batch-size: 16384
-  batch-size-boost-factor: 100
-  linger-ms: 5
-  request-timeout-ms: 60000
-  retry-count: 5
-
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  product-review-group-id: product-review-topic-consumer
+  product-review-content-group-id: product-review-content-topic-name
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

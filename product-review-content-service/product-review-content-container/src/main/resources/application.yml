@@ -1,0 +1,42 @@
+server:
+  port: 8181
+
+
+logging:
+  level:
+    com.online.shop.system: DEBUG
+
+product-review-content-service:
+  product-review-content-topic-name: product-review-content
+  outbox-scheduler-fixed-rate: 10000
+  outbox-scheduler-initial-delay: 10000
+
+data:
+  mongodb:
+    host: localhost
+    port: 27017
+    database: online_shopping_system
+
+servlet:
+  multipart:
+    max-file-size: 256MB
+    max-request-size: 256MB
+    enabled: false
+
+kafka-config:
+  bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+  schema-registry-url-key: schema.registry.url
+  schema-registry-url: http://localhost:8081
+  num-of-partitions: 3
+  replication-factor: 3
+
+kafka-producer-config:
+  key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
+  value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
+  compression-type: snappy
+  acks: all
+  batch-size: 16384
+  batch-size-boost-factor: 100
+  linger-ms: 5
+  request-timeout-ms: 60000
+  retry-count: 5

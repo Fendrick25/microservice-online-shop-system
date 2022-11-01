@@ -19,5 +19,6 @@ public class ProductRatingEntity {
     private int rating;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_ID")
     private ProductEntity product;
 }

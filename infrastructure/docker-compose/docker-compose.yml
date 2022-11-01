@@ -112,7 +112,7 @@ services:
     networks:
       online_shop_system_network:
   postgres:
-    container_name: order_system
+    container_name: product_system
     image: postgres
     depends_on:
       - zookeeper
@@ -127,7 +127,7 @@ services:
       POSTGRES_PASSWORD: "root"
       POSTGRES_DB: "postgres"
     volumes:
-      - "./volumes/postgres/"
+      - "/volumes/postgres/"
   init-kafka:
     image: confluentinc/cp-kafka:${KAFKA_VERSION}
     entrypoint: [ '/bin/sh', '-c' ]
@@ -145,10 +145,10 @@ services:
       kafka-topics --bootstrap-server kafka-broker-1:9092 --list
       
       echo -e 'Deleting kafka topics'
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic product-review --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic product-review-content --delete --if-exists
       
       echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic product-review --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic product-review-content --replication-factor 3 --partitions 3
       
       echo -e 'Successfully created the following topics:'
       kafka-topics --bootstrap-server kafka-broker-1:9092 --list

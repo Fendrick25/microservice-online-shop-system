@@ -4,6 +4,12 @@
   "name": "ProductReviewContentUrlAvroModel",
   "fields": [
     {
+      "name": "productReviewID",
+      "type": {
+        "type": "int"
+      }
+    },
+    {
       "name": "productID",
       "type": {
         "type": "string",
@@ -11,21 +17,15 @@
       }
     },
     {
-      "name": "imageUrls",
+      "name": "imageUrl",
       "type": {
-        "type": "array",
-        "items":{
-          "type":"string"
-        }
+        "type": "string"
       }
     },
     {
-      "name": "videoUrls",
+      "name": "videoUrl",
       "type": {
-        "type": "array",
-        "items":{
-          "type":"string"
-        }
+        "type": "string"
       }
     }
 

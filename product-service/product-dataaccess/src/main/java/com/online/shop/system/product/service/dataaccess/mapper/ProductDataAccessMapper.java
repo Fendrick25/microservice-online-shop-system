@@ -14,7 +14,7 @@ public class ProductDataAccessMapper {
 
     public Product productEntityToProduct(ProductEntity productEntity){
         return Product.builder()
-                .productID(productEntity.getProductID())
+                .productID(productEntity.getId())
                 .name(productEntity.getName())
                 .description(productEntity.getDescription())
                 .quantity(productEntity.getQuantity())
@@ -29,7 +29,7 @@ public class ProductDataAccessMapper {
 
     public ProductEntity productToProductEntity(Product product){
         return ProductEntity.builder()
-                .productID(product.getProductID())
+                .id(product.getProductID())
                 .name(product.getName())
                 .description(product.getDescription())
                 .quantity(product.getQuantity())

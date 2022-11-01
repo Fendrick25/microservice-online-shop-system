@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.UUID;
+
 
 @Slf4j
 @Service
@@ -45,13 +47,13 @@ public class ProductReviewApplicationServiceImpl implements ProductReviewApplica
     }
 
     @Override
-    public PagingResponse getProductReviewByProductID(String productID, int page, int size) {
+    public PagingResponse getProductReviewByProductID(UUID productID, int page, int size) {
         return productReviewRepository.getProductReviewByProductID(productID, page, size);
     }
 
     @Override
-    public PagingResponse getProductReviewByRating(int rating, int page, int size) {
-        return productReviewRepository.getProductReviewByRating(rating, page, size);
+    public PagingResponse getProductReviewByProductIDAndRating(UUID productID, int rating, int page, int size) {
+        return productReviewRepository.getProductReviewByProductIDAndRating(productID, rating, page, size);
     }
 
 
