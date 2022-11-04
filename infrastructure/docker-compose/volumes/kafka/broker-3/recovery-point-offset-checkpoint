@@ -1,5 +1,5 @@
 0
-51
+57
 __consumer_offsets 13 0
 __consumer_offsets 46 0
 __consumer_offsets 9 0
@@ -7,13 +7,15 @@ __consumer_offsets 42 0
 __consumer_offsets 21 0
 __consumer_offsets 17 0
 __consumer_offsets 30 0
-__consumer_offsets 26 14
+__consumer_offsets 26 2
+product-review-content 1 0
 __consumer_offsets 5 0
 __consumer_offsets 38 0
+user 1 0
 __consumer_offsets 1 0
 __consumer_offsets 34 0
 __consumer_offsets 16 0
-_schemas 0 3
+_schemas 0 2
 __consumer_offsets 45 0
 __consumer_offsets 12 0
 __consumer_offsets 41 0
@@ -25,6 +27,8 @@ __consumer_offsets 29 2
 __consumer_offsets 25 0
 __consumer_offsets 8 0
 __consumer_offsets 37 0
+user 0 0
+product-review-content 2 0
 __consumer_offsets 4 0
 __consumer_offsets 33 0
 __consumer_offsets 15 0
@@ -48,6 +52,8 @@ __consumer_offsets 18 0
 __consumer_offsets 31 0
 __consumer_offsets 27 0
 __consumer_offsets 39 0
+product-review-content 0 0
 __consumer_offsets 6 0
 __consumer_offsets 35 0
+user 2 0
 __consumer_offsets 2 0
