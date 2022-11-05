@@ -5,11 +5,11 @@
 *.iml
 *.ipr
 
-broker-1/
-broker-2/
-broker-3/
-zookeeper/data/
-zookeeper/transactions/
+**/broker-1/*
+**/broker-2/*
+**/broker-3/*
+**/zookeeper/data/*
+**/zookeeper/transactions/*
 
 HELP.md
 target/
