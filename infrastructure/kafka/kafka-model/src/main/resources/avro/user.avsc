@@ -1,0 +1,14 @@
+{
+  "namespace": "com.online.shop.system.kafka.avro.model",
+  "type": "record",
+  "name": "UserAvroModel",
+  "fields": [
+    {
+      "name": "userID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    }
+  ]
+}

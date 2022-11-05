@@ -1,11 +1,9 @@
 package com.online.shop.system.product.service.application.rest;
 
+import com.online.shop.system.product.service.domain.dto.create.CheckProductStock;
 import com.online.shop.system.product.service.domain.dto.create.CreateProduct;
 import com.online.shop.system.product.service.domain.dto.create.UpdateProduct;
-import com.online.shop.system.product.service.domain.dto.create.response.Data;
-import com.online.shop.system.product.service.domain.dto.create.response.GetProductResponse;
-import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
-import com.online.shop.system.product.service.domain.dto.create.response.ProductIDResponse;
+import com.online.shop.system.product.service.domain.dto.create.response.*;
 import com.online.shop.system.product.service.domain.ports.input.service.ProductApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -59,5 +57,10 @@ public class ProductController {
                                                         @RequestParam(defaultValue = "1") int page,
                                                         @RequestParam(defaultValue = "10") int size){
         return new ResponseEntity<>(productApplicationService.searchProduct(productName, page, size), HttpStatus.OK);
+    }
+
+    @GetMapping("/stocks/")
+    public ResponseEntity<List<CheckProductStockResponse>> checkProductStock(@RequestBody List<CheckProductStock> checkProductStocks){
+        return new ResponseEntity<>(productApplicationService.checkProductStock(checkProductStocks), HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.online.shop.system.product.service.domain;
 
+import com.online.shop.system.product.service.domain.dto.create.CheckProductStock;
 import com.online.shop.system.product.service.domain.dto.create.response.*;
 import com.online.shop.system.product.service.domain.entity.Product;
 import com.online.shop.system.product.service.domain.ports.input.service.ProductApplicationService;
@@ -12,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -71,6 +74,20 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
     @Override
     public PagingResponse searchProduct(String productName, int page, int size) {
         return productRepository.searchProduct(productName, page, size);
+    }
+
+    @Override
+    public List<CheckProductStockResponse> checkProductStock(List<CheckProductStock> checkProductStocks) {
+        Map<UUID, String> checkedProducts = productRepository.checkProductStock(checkProductStocks.stream().map(productDataMapper::checkProductStockToProduct).collect(Collectors.toList()));
+        List<CheckProductStockResponse> responses = new ArrayList<>();
+        checkedProducts.forEach((k, v) -> {
+            responses.add(CheckProductStockResponse.builder()
+                    .productID(k)
+                    .message(v)
+                    .build());
+        });
+
+        return responses;
     }
 
 

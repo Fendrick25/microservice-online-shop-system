@@ -12,6 +12,7 @@
         <module>infrastructure</module>
         <module>product-review-content-service</module>
         <module>user-service</module>
+        <module>cart-service</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -93,6 +94,56 @@
             <dependency>
                 <groupId>com.online.shop.system</groupId>
                 <artifactId>product-review-content-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>user-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>user-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>user-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>user-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>user-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>cart-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>cart-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>cart-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>cart-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>cart-messaging</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

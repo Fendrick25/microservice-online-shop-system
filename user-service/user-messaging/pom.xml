@@ -11,9 +11,19 @@
 
     <artifactId>user-messaging</artifactId>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.online.shop.system</groupId>
+            <artifactId>user-application-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.online.shop.system</groupId>
+            <artifactId>kafka-producer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.online.shop.system</groupId>
+            <artifactId>kafka-model</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

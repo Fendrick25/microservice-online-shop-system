@@ -11,6 +11,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>user-domain</module>
+        <module>user-dataaccess</module>
+        <module>user-application</module>
+        <module>user-messaging</module>
+        <module>user-container</module>
     </modules>
     <artifactId>user-service</artifactId>
 

@@ -4,7 +4,6 @@ import com.online.shop.system.product.service.dataaccess.entity.ProductEntity;
 import com.online.shop.system.product.service.dataaccess.exception.ResourceNotFoundException;
 import com.online.shop.system.product.service.dataaccess.mapper.ProductDataAccessMapper;
 import com.online.shop.system.product.service.dataaccess.repository.ProductJpaRepository;
-import com.online.shop.system.product.service.dataaccess.repository.ProductRatingJpaRepository;
 import com.online.shop.system.product.service.domain.dto.create.response.Data;
 import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
 import com.online.shop.system.product.service.domain.entity.Product;
@@ -16,7 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -86,6 +87,18 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .build();
     }
 
+    @Override
+    public Map<UUID, String> checkProductStock(List<Product> products) {
+        Map<UUID, String> productWithStatus = new HashMap<>();
+        products.forEach(product -> {
+            int currentStock = productJpaRepository.getProductQuantity(product.getProductID());
+            if(currentStock >= product.getQuantity())
+                productWithStatus.put(product.getProductID(), "IN_STOCK");
+            if(currentStock <= product.getQuantity())
+                productWithStatus.put(product.getProductID(), Integer.toString(currentStock));
+        });
+        return productWithStatus;
+    }
 
     private ProductEntity find(UUID productID){
         return productJpaRepository.findById(productID).orElseThrow(() -> new ResourceNotFoundException("Product not found"));

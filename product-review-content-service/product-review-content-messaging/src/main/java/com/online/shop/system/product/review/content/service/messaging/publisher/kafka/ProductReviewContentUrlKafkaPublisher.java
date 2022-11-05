@@ -29,9 +29,8 @@ public class ProductReviewContentUrlKafkaPublisher implements ProductReviewConte
                 .productReviewContentUrlToProductReviewContentUrlAvroModel(productReviewContentUrl);
 
         try {
-            log.info(productReviewContentServiceConfigData.getProductReviewContentTopicName());
             kafkaProducer.send(productReviewContentServiceConfigData.getProductReviewContentTopicName(),
-                    UUID.randomUUID().toString(),
+                    id,
                     productReviewContentUrlAvroModel,
                     kafkaMessageHelper.getKafkaCallback(productReviewContentServiceConfigData.getProductReviewContentTopicName(),
                             productReviewContentUrlAvroModel));
