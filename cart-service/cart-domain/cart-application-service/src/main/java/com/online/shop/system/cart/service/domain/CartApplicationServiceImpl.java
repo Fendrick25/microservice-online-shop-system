@@ -15,6 +15,7 @@ import com.online.shop.system.cart.service.domain.ports.output.repository.CartRe
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -82,7 +83,7 @@ public class CartApplicationServiceImpl implements CartApplicationService {
     }
 
     private void checkProductStock(List<CheckProductStock> checkProductStocks){
-        Mono<List<CheckProductStockResponse>> response = webClient.post()
+        Mono<List<CheckProductStockResponse>> response = webClient.method(HttpMethod.GET)
                 .uri("http://localhost:8180/api/v1/products/stocks/")
                 .body(BodyInserters.fromValue(checkProductStocks))
                 .accept(MediaType.APPLICATION_JSON)

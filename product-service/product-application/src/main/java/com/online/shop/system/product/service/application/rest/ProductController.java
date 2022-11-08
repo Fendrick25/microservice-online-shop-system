@@ -59,7 +59,7 @@ public class ProductController {
         return new ResponseEntity<>(productApplicationService.searchProduct(productName, page, size), HttpStatus.OK);
     }
 
-    @GetMapping("/stocks/")
+    @GetMapping("/stocks")
     public ResponseEntity<List<CheckProductStockResponse>> checkProductStock(@RequestBody List<CheckProductStock> checkProductStocks){
         return new ResponseEntity<>(productApplicationService.checkProductStock(checkProductStocks), HttpStatus.OK);
     }
