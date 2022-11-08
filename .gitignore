@@ -5,11 +5,6 @@
 *.iml
 *.ipr
 
-**/volumes/zookeeper/broker-1/*
-**/volumes/zookeeper/broker-2/*
-**/volumes/zookeeper/broker-3/*
-**/volumes/zookeeper/data/*
-**/volumes/zookeeper/transactions/*
 
 HELP.md
 target/
