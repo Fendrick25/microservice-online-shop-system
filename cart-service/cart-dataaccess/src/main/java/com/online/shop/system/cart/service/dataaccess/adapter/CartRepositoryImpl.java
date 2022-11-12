@@ -50,11 +50,12 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
+    @Transactional
     public Cart updateCartItem(CartItem cartItem) {
         CartItemEntity cartItemEntity = cartItemJpaRepository.findById(cartItem.getId()).orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
         cartItemEntity.setQuantity(cartItemEntity.getQuantity());
         cartItemJpaRepository.save(cartItemEntity);
-        return cartDataAccessMapper.cartEntityToCart(cartJpaRepository.getReferenceById(cartItem.getCartID()));
+        return cartDataAccessMapper.cartEntityToCart(cartJpaRepository.getReferenceById(cartItemEntity.getCart().getId()));
     }
 
     @Override
@@ -63,6 +64,7 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
+    @Transactional
     public Cart getCart(UUID userID) {
         return cartDataAccessMapper.cartEntityToCart(cartJpaRepository.findByUserID(userID));
     }

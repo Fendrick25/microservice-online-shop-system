@@ -21,7 +21,7 @@ public class GetCartResponse {
     @Builder
     @AllArgsConstructor
     public static class Items{
-        private final UUID cartItemID;
+        private final Integer cartItemID;
         private final Product product;
         private final int quantity;
         private final BigDecimal subTotal;

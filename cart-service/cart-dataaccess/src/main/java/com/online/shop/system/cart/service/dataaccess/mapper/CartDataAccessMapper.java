@@ -29,6 +29,7 @@ public class CartDataAccessMapper {
 
     private CartItem cartItemEntityToCartItem(CartItemEntity cartItemEntity){
         return CartItem.builder()
+                .id(cartItemEntity.getId())
                 .product(Product.builder()
                         .id(cartItemEntity.getProductID())
                         .build())

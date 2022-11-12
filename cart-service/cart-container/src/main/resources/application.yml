@@ -9,6 +9,8 @@ cart-service:
   user-topic-name: user
 
 spring:
+  application:
+    name: cart-service
   jpa:
     hibernate:
       ddl-auto: none
@@ -52,3 +54,9 @@ kafka-consumer-config:
   max-partition-fetch-bytes-default: 1048576
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

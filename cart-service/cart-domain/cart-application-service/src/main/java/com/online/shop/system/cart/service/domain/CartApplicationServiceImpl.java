@@ -6,8 +6,10 @@ import com.online.shop.system.cart.service.domain.dto.create.response.CartIDResp
 import com.online.shop.system.cart.service.domain.dto.create.response.GetCartResponse;
 import com.online.shop.system.cart.service.domain.dto.message.CheckProductStock;
 import com.online.shop.system.cart.service.domain.dto.message.CheckProductStockResponse;
+import com.online.shop.system.cart.service.domain.dto.message.GetProductResponse;
 import com.online.shop.system.cart.service.domain.dto.message.User;
 import com.online.shop.system.cart.service.domain.entity.Cart;
+import com.online.shop.system.cart.service.domain.entity.Product;
 import com.online.shop.system.cart.service.domain.exception.ProductOutOfStockException;
 import com.online.shop.system.cart.service.domain.mapper.CartDataMapper;
 import com.online.shop.system.cart.service.domain.ports.input.service.CartApplicationService;
@@ -23,8 +25,11 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Validated
@@ -37,7 +42,7 @@ public class CartApplicationServiceImpl implements CartApplicationService {
 
     private final CartDataMapper cartDataMapper;
 
-    private final WebClient webClient;
+    private final WebClient.Builder webClient;
 
     @Override
     public void createCart(User user) {
@@ -76,22 +81,41 @@ public class CartApplicationServiceImpl implements CartApplicationService {
 
     @Override
     public GetCartResponse getCart(UUID userID) {
-        Cart cart = cartDomainService.calculateCart(cartRepository.getCart(userID));
+        Cart cart = cartDomainService.calculateCart(updateCartInformation(cartRepository.getCart(userID)));
         log.info("Cart found for user id: {}", cart.getUserID());
         return cartDataMapper.cartToGetCartResponse(cart);
 
     }
 
     private void checkProductStock(List<CheckProductStock> checkProductStocks){
-        Mono<List<CheckProductStockResponse>> response = webClient.method(HttpMethod.GET)
-                .uri("http://localhost:8180/api/v1/products/stocks/")
+        Mono<List<CheckProductStockResponse>> response = webClient.build().method(HttpMethod.GET)
+                .uri("http://product-service/api/v1/products/stocks/")
                 .body(BodyInserters.fromValue(checkProductStocks))
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<>() {});
         List<CheckProductStockResponse> checkedProducts = response.block();
-        if(!(checkedProducts.get(0).getMessage().equalsIgnoreCase("IN_STOCK")))
+        if (checkedProducts != null && !(checkedProducts.get(0).getMessage().equalsIgnoreCase("IN_STOCK")))
             throw new ProductOutOfStockException("Stock left: " + checkedProducts.get(0).getMessage());
+    }
+
+    private Cart updateCartInformation(Cart cart){
+        Map<UUID, Product> productMap = new HashMap<>();
+        cart.getItems().forEach(cartItem -> productMap.put(cartItem.getProduct().getId(), cartItem.getProduct()));
+        Mono<List<GetProductResponse>> response = webClient.build().method(HttpMethod.GET)
+                .uri("http://product-service/api/v1/products/carts/info")
+                .body(BodyInserters.fromValue(cart.getItems().stream()
+                        .map(cartItem -> cartItem.getProduct().getId()).collect(Collectors.toList())))
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<>() {});
+
+        List<GetProductResponse> products = response.block();
+        if (products != null) {
+            products.forEach(product -> productMap.put(product.getProductID(), cartDataMapper.getProductResponseToProduct(product)));
+        }
+        cart.getItems().forEach(cartItem -> cartItem.setProduct(productMap.get(cartItem.getProduct().getId())));
+        return cart;
     }
 
 }

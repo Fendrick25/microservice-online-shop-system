@@ -90,5 +90,10 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
         return responses;
     }
 
+    @Override
+    public List<CartGetProductResponse> getProducts(List<UUID> productIDs) {
+        return productRepository.getProducts(productIDs).stream().map(productDataMapper::productToCartGetProductResponse).collect(Collectors.toList());
+    }
+
 
 }

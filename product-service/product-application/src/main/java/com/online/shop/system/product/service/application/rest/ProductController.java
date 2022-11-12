@@ -63,4 +63,9 @@ public class ProductController {
     public ResponseEntity<List<CheckProductStockResponse>> checkProductStock(@RequestBody List<CheckProductStock> checkProductStocks){
         return new ResponseEntity<>(productApplicationService.checkProductStock(checkProductStocks), HttpStatus.OK);
     }
+
+    @GetMapping("/carts/info")
+    public ResponseEntity<List<CartGetProductResponse>> getProductsInformation(@RequestBody List<UUID> productIDs){
+        return new ResponseEntity<>(productApplicationService.getProducts(productIDs), HttpStatus.OK);
+    }
 }

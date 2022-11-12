@@ -18,4 +18,6 @@ public interface ProductRepository {
     PagingResponse searchProduct(String productName, int page, int size);
     Map<UUID, String> checkProductStock(List<Product> products);
 
+    List<Product> getProducts(List<UUID> productIDs);
+
 }

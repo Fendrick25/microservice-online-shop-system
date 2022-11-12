@@ -4,6 +4,7 @@ import com.online.shop.system.cart.service.domain.dto.create.AddCartItem;
 import com.online.shop.system.cart.service.domain.dto.create.UpdateCartItem;
 import com.online.shop.system.cart.service.domain.dto.create.response.GetCartResponse;
 import com.online.shop.system.cart.service.domain.dto.message.CheckProductStock;
+import com.online.shop.system.cart.service.domain.dto.message.GetProductResponse;
 import com.online.shop.system.cart.service.domain.entity.Cart;
 import com.online.shop.system.cart.service.domain.entity.CartItem;
 import com.online.shop.system.cart.service.domain.entity.Product;
@@ -54,7 +55,7 @@ public class CartDataMapper {
                 .userID(cart.getUserID())
                 .items(cart.getItems().stream()
                         .map(item -> GetCartResponse.Items.builder()
-                                .cartItemID(item.getCartID())
+                                .cartItemID(item.getId())
                                 .product(GetCartResponse.Items.Product.builder()
                                         .productID(item.getProduct().getId())
                                         .name(item.getProduct().getName())
@@ -66,6 +67,16 @@ public class CartDataMapper {
                                 .subTotal(item.getSubTotal())
                                 .build()).collect(Collectors.toList()))
                 .totalPrice(cart.getTotalPrice())
+                .build();
+    }
+
+    public Product getProductResponseToProduct(GetProductResponse getProductResponse){
+        return Product.builder()
+                .id(getProductResponse.getProductID())
+                .description(getProductResponse.getDescription())
+                .name(getProductResponse.getName())
+                .price(getProductResponse.getPrice())
+                .imageUrl(getProductResponse.getImageUrl())
                 .build();
     }
 }

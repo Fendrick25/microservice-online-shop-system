@@ -1,6 +1,7 @@
 package com.online.shop.system.product.service.domain.mapper;
 
 import com.online.shop.system.product.service.domain.dto.create.CheckProductStock;
+import com.online.shop.system.product.service.domain.dto.create.response.CartGetProductResponse;
 import com.online.shop.system.product.service.domain.dto.create.response.GetProductResponse;
 import com.online.shop.system.product.service.domain.dto.create.response.ProductIDResponse;
 import com.online.shop.system.product.service.domain.dto.create.response.ProductOverview;
@@ -68,6 +69,16 @@ public class ProductDataMapper {
         return Product.builder()
                 .productID(checkProductStock.getProductID())
                 .quantity(checkProductStock.getQuantity())
+                .build();
+    }
+
+    public CartGetProductResponse productToCartGetProductResponse(Product product){
+        return CartGetProductResponse.builder()
+                .productID(product.getProductID())
+                .name(product.getName())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .imageUrl(product.getImageUrl())
                 .build();
     }
 }

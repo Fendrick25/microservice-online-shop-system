@@ -94,10 +94,15 @@ public class ProductRepositoryImpl implements ProductRepository {
             int currentStock = productJpaRepository.getProductQuantity(product.getProductID());
             if(currentStock >= product.getQuantity())
                 productWithStatus.put(product.getProductID(), "IN_STOCK");
-            if(currentStock <= product.getQuantity())
+            if(currentStock < product.getQuantity())
                 productWithStatus.put(product.getProductID(), Integer.toString(currentStock));
         });
         return productWithStatus;
+    }
+
+    @Override
+    public List<Product> getProducts(List<UUID> productIDs) {
+        return productJpaRepository.findByIdIn(productIDs).stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList());
     }
 
     private ProductEntity find(UUID productID){

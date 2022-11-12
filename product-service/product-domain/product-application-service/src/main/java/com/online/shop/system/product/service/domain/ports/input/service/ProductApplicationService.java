@@ -3,10 +3,7 @@ package com.online.shop.system.product.service.domain.ports.input.service;
 import com.online.shop.system.product.service.domain.dto.create.CheckProductStock;
 import com.online.shop.system.product.service.domain.dto.create.CreateProduct;
 import com.online.shop.system.product.service.domain.dto.create.UpdateProduct;
-import com.online.shop.system.product.service.domain.dto.create.response.CheckProductStockResponse;
-import com.online.shop.system.product.service.domain.dto.create.response.GetProductResponse;
-import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
-import com.online.shop.system.product.service.domain.dto.create.response.ProductIDResponse;
+import com.online.shop.system.product.service.domain.dto.create.response.*;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
@@ -21,4 +18,6 @@ public interface ProductApplicationService {
     PagingResponse getProductByCategory(@Validated UUID categoryID, int page, int size);
     PagingResponse searchProduct(@Validated String productName, int page, int size);
     List<CheckProductStockResponse> checkProductStock(List<CheckProductStock> checkProductStocks);
+
+    List<CartGetProductResponse> getProducts(List<UUID> productIDs);
 }
