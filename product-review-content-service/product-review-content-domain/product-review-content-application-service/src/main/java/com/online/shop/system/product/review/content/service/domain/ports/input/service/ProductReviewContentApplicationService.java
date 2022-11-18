@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface ProductReviewContentApplicationService {
 
     void uploadContent(@Validated Integer productReviewID, UUID productID, List<MultipartFile> images, List<MultipartFile> videos);
+
 }

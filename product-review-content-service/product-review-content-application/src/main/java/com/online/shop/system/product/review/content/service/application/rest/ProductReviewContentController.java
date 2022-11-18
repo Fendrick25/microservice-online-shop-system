@@ -24,4 +24,6 @@ public class ProductReviewContentController {
         productReviewContentApplicationService.uploadContent(productReviewID, productID, List.of(images), List.of(videos));
         return ResponseEntity.ok("");
     }
+
+
 }

@@ -101,7 +101,6 @@ public class CartApplicationServiceImpl implements CartApplicationService {
 
     private Cart updateCartInformation(Cart cart){
         Map<UUID, Product> productMap = new HashMap<>();
-        cart.getItems().forEach(cartItem -> productMap.put(cartItem.getProduct().getId(), cartItem.getProduct()));
         Mono<List<GetProductResponse>> response = webClient.build().method(HttpMethod.GET)
                 .uri("http://product-service/api/v1/products/carts/info")
                 .body(BodyInserters.fromValue(cart.getItems().stream()
