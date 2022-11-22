@@ -12,19 +12,19 @@ spring:
       routes[0]:
         id: product-service
         uri: lb://product-service
-        predicates[0]: Path=/api/v1/products
+        predicates[0]: Path=/api/v1/products/**
       routes[1]:
         id: product-review-content-service
         uri: lb://product-review-content-service
-        predicates[0]: Path=/api/v1/products/reviews/contents
+        predicates[0]: Path=/api/v1/products/reviews/contents/**
       routes[2]:
         id: user-service
         uri: lb://user-service
-        predicates[0]: Path=/api/v1/users
+        predicates[0]: Path=/api/v1/users/**
       routes[3]:
         id: cart-service
         uri: lb://cart-service
-        predicates[0]: Path=/api/v1/carts
+        predicates[0]: Path=/api/v1/carts/**
       routes[4]:
         id: discovery-service
         uri: http://localhost:8761
