@@ -65,7 +65,7 @@ public class ProductReviewRepositoryImpl implements ProductReviewRepository {
         Pageable paging = PageRequest.of(page - 1, size);
         Page<ProductReviewEntity> productReviews = productReviewJpaRepository.findByProductId(productID, paging);
         return PagingResponse.builder()
-                .data(new Data<>(productReviews.getContent().stream().map(productReviewDataAccessMapper::productReviewEntityToProductReview).collect(Collectors.toList())))
+                .data(productReviews.getContent().stream().map(productReviewDataAccessMapper::productReviewEntityToProductReview).collect(Collectors.toList()))
                 .currentPage(productReviews.getNumber() + 1)
                 .size(productReviews.getSize())
                 .total(((int) productReviews.getTotalElements()))
@@ -78,7 +78,7 @@ public class ProductReviewRepositoryImpl implements ProductReviewRepository {
         Pageable paging = PageRequest.of(page - 1, size);
         Page<ProductReviewEntity> productReviews = productReviewJpaRepository.findByProductIdAndRating(productID, rating, paging);
         return PagingResponse.builder()
-                .data(new Data<>(productReviews.getContent().stream().map(productReviewDataAccessMapper::productReviewEntityToProductReview).collect(Collectors.toList())))
+                .data(productReviews.getContent().stream().map(productReviewDataAccessMapper::productReviewEntityToProductReview).collect(Collectors.toList()))
                 .currentPage(productReviews.getNumber() + 1)
                 .size(productReviews.getSize())
                 .total(((int) productReviews.getTotalElements()))

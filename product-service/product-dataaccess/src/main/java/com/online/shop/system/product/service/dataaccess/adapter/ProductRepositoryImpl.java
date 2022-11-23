@@ -66,7 +66,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         Pageable paging = PageRequest.of(page - 1, size);
         Page<ProductEntity> pageProducts = productJpaRepository.findByCategoryId(categoryID, paging);
         return PagingResponse.builder()
-                .data(new Data<>(pageProducts.getContent().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList())))
+                .data(pageProducts.getContent().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList()))
                 .currentPage(pageProducts.getNumber() + 1)
                 .size(pageProducts.getSize())
                 .total(((int) pageProducts.getTotalElements()))
@@ -79,7 +79,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         Pageable paging = PageRequest.of(page - 1, size);
         Page<ProductEntity> pageProducts = productJpaRepository.findByNameContaining(productName, paging);
         return PagingResponse.builder()
-                .data(new Data<>(pageProducts.getContent().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList())))
+                .data(pageProducts.getContent().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList()))
                 .currentPage(pageProducts.getNumber() + 1)
                 .size(pageProducts.getSize())
                 .total(((int) pageProducts.getTotalElements()))

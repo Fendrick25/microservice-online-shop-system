@@ -9,9 +9,9 @@ import javax.validation.constraints.NotNull;
 @Getter
 @AllArgsConstructor
 @Builder
-public class PagingResponse {
+public class PagingResponse<T> {
     @NotNull
-    private final Data data;
+    private final T data;
     @NotNull
     private final int size;
     @NotNull
