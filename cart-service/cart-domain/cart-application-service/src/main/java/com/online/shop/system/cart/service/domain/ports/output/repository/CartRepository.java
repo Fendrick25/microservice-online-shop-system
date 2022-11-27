@@ -9,7 +9,9 @@ public interface CartRepository {
 
     void createCart(Cart cart);
     Cart addCartItem(CartItem cartItem);
-    Cart updateCartItem(CartItem cartItem);
+    CartItem updateCartItem(CartItem cartItem);
     void deleteCartItem(Integer cartItemID);
     Cart getCart(UUID userID);
+
+    void updateCart(Cart cart);
 }

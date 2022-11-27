@@ -3,6 +3,7 @@ package com.online.shop.system.cart.service.domain.entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,7 +16,8 @@ public class Cart {
 
     private UUID id;
     private final UUID userID;
-    private final List<CartItem> items;
+    @Setter
+    private List<CartItem> items;
     private BigDecimal totalPrice;
 
     public void initializeCart(){

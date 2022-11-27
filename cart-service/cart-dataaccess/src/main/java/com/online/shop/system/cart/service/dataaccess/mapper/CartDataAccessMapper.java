@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class CartDataAccessMapper {
 
-    public CartEntity cartToCartEntity(Cart cart){
+    public CartEntity emptyCartToCartEntity(Cart cart){
         return CartEntity.builder()
                 .id(cart.getId())
                 .userID(cart.getUserID())
@@ -27,9 +27,10 @@ public class CartDataAccessMapper {
                 .build();
     }
 
-    private CartItem cartItemEntityToCartItem(CartItemEntity cartItemEntity){
+    public CartItem cartItemEntityToCartItem(CartItemEntity cartItemEntity){
         return CartItem.builder()
                 .id(cartItemEntity.getId())
+                .cartID(cartItemEntity.getCart().getId())
                 .product(Product.builder()
                         .id(cartItemEntity.getProductID())
                         .build())

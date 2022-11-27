@@ -26,7 +26,7 @@ public class CartRepositoryImpl implements CartRepository {
 
     @Override
     public void createCart(Cart cart) {
-        cartJpaRepository.save(cartDataAccessMapper.cartToCartEntity(cart));
+        cartJpaRepository.save(cartDataAccessMapper.emptyCartToCartEntity(cart));
     }
 
     @Override
@@ -43,7 +43,6 @@ public class CartRepositoryImpl implements CartRepository {
             return cartDataAccessMapper.cartEntityToCart(cartJpaRepository.getReferenceById(cartEntity.getId()));
         }
 
-        System.out.println("found");
         optionalCartItemEntity.get().setQuantity(optionalCartItemEntity.get().getQuantity() + cartItem.getQuantity());
         cartItemJpaRepository.save(optionalCartItemEntity.get());
         return cartDataAccessMapper.cartEntityToCart(cartJpaRepository.getReferenceById(cartEntity.getId()));
@@ -51,11 +50,10 @@ public class CartRepositoryImpl implements CartRepository {
 
     @Override
     @Transactional
-    public Cart updateCartItem(CartItem cartItem) {
-        CartItemEntity cartItemEntity = cartItemJpaRepository.findById(cartItem.getId()).orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
-        cartItemEntity.setQuantity(cartItemEntity.getQuantity());
-        cartItemJpaRepository.save(cartItemEntity);
-        return cartDataAccessMapper.cartEntityToCart(cartJpaRepository.getReferenceById(cartItemEntity.getCart().getId()));
+    public CartItem updateCartItem(CartItem cartItem) {
+        CartItemEntity cartItemEntity = findCartItem(cartItem.getId());
+        cartItemEntity.setQuantity(cartItem.getQuantity());
+        return cartDataAccessMapper.cartItemEntityToCartItem(cartItemJpaRepository.save(cartItemEntity));
     }
 
     @Override
@@ -67,6 +65,16 @@ public class CartRepositoryImpl implements CartRepository {
     @Transactional
     public Cart getCart(UUID userID) {
         return cartDataAccessMapper.cartEntityToCart(cartJpaRepository.findByUserID(userID));
+    }
+
+    @Override
+    @Transactional
+    public void updateCart(Cart cart) {
+        cart.getItems().forEach(this::updateCartItem);
+    }
+
+    private CartItemEntity findCartItem(Integer cartItemID){
+        return cartItemJpaRepository.findById(cartItemID).orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
     }
 
 

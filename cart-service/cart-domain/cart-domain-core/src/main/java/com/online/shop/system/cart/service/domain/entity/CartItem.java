@@ -17,7 +17,9 @@ public class CartItem {
 
     @Setter
     private Product product;
-    private final int quantity;
+
+    @Setter
+    private int quantity;
     private BigDecimal subTotal;
 
     public void calculateSubTotal(){

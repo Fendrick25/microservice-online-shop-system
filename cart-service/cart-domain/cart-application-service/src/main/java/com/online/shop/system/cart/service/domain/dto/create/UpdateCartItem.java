@@ -11,8 +11,6 @@ import java.util.UUID;
 public class UpdateCartItem extends CartItemDTO {
     @NotNull
     private final Integer cartItemID;
-
-
     @Builder
     public UpdateCartItem(Integer cartItemID, @NotNull UUID productID, @NotNull int quantity) {
         super(productID, quantity);

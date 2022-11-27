@@ -10,6 +10,10 @@ import com.online.shop.system.cart.service.domain.entity.CartItem;
 import com.online.shop.system.cart.service.domain.entity.Product;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -35,19 +39,27 @@ public class CartDataMapper {
                 .build();
     }
 
-    public CheckProductStock addCartItemToCheckProductStock(AddCartItem addCartItem){
+
+    public List<CheckProductStock> cartItemsToCheckProductStock(Map<UUID, CartItem> cartItems){
+        List<CheckProductStock> checkProductStocks = new ArrayList<>();
+        cartItems.forEach((k, v) -> {
+            checkProductStocks.add(CheckProductStock.builder()
+                    .productID(v.getProduct().getId())
+                    .quantity(v.getQuantity())
+                    .build());
+        });
+
+        return checkProductStocks;
+    }
+
+    public CheckProductStock cartItemToCheckProductStock(CartItem cartItem){
         return CheckProductStock.builder()
-                .productID(addCartItem.getProductID())
-                .quantity(addCartItem.getQuantity())
+                .productID(cartItem.getProduct().getId())
+                .quantity(cartItem.getQuantity())
                 .build();
     }
 
-    public CheckProductStock updateCartItemToCheckProductStock(UpdateCartItem updateCartItem){
-        return CheckProductStock.builder()
-                .productID(updateCartItem.getProductID())
-                .quantity(updateCartItem.getQuantity())
-                .build();
-    }
+
 
     public GetCartResponse cartToGetCartResponse(Cart cart){
         return GetCartResponse.builder()
