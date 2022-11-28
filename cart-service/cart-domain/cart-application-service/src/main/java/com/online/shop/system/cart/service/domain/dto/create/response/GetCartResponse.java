@@ -16,7 +16,6 @@ public class GetCartResponse {
     private final UUID userID;
     private final List<Items> items;
     private final BigDecimal totalPrice;
-    private List<String> messages;
 
     @Getter
     @Builder

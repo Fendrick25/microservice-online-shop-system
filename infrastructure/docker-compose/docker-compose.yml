@@ -112,7 +112,7 @@ services:
     networks:
       online_shop_system_network:
   postgres:
-    container_name: product_system
+    container_name: online_shop_system
     image: postgres
     depends_on:
       - zookeeper
@@ -147,10 +147,14 @@ services:
       echo -e 'Deleting kafka topics'
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic product-review-content --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic user --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic order-request --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic order-response --delete --if-exists
       
       echo -e 'Creating kafka topics'
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic product-review-content --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic user --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic order-request --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic order-response --replication-factor 3 --partitions 3
       
       echo -e 'Successfully created the following topics:'
       kafka-topics --bootstrap-server kafka-broker-1:9092 --list
