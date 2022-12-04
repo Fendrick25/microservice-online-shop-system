@@ -1,6 +1,5 @@
 package com.online.shop.system.product.service.domain.ports.output.repository;
 
-import com.online.shop.system.product.service.domain.dto.create.CheckProductStock;
 import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
 import com.online.shop.system.product.service.domain.entity.Product;
 

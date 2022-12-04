@@ -30,7 +30,9 @@ public class Order {
     public void initializeOrder(){
         id = UUID.randomUUID();
         purchaseDate = ZonedDateTime.now(ZoneId.of("UTC"));
+        initializeOrderItems();
         details.add(OrderDetail.builder()
+                        .orderID(id)
                         .id(id.toString().concat("1"))
                         .message("WAITING FOR PAYMENT")
                         .orderStatus(OrderStatus.PENDING)
@@ -42,6 +44,7 @@ public class Order {
         if(details.peek().getOrderStatus() != OrderStatus.PENDING)
             throw new OrderDomainException("NOT IN CORRECT STATE FOR PAY ORDER");
         return OrderDetail.builder()
+                .orderID(id)
                 .id(id.toString().concat("2"))
                 .orderStatus(OrderStatus.PAID)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
@@ -53,6 +56,7 @@ public class Order {
         if(details.peek().getOrderStatus() != OrderStatus.PAID)
             throw new OrderDomainException("NOT IN CORRECT STATE FOR SHIP ORDER");
         return OrderDetail.builder()
+                .orderID(id)
                 .id(id.toString().concat("3"))
                 .orderStatus(OrderStatus.SHIPPED)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
@@ -64,6 +68,7 @@ public class Order {
         if(details.peek().getOrderStatus() != OrderStatus.SHIPPED)
             throw new OrderDomainException("NOT IN CORRECT STATE FOR ARRIVE ORDER");
         return OrderDetail.builder()
+                .orderID(id)
                 .id(id.toString().concat("4"))
                 .orderStatus(OrderStatus.ARRIVED)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
@@ -75,6 +80,7 @@ public class Order {
         if(details.peek().getOrderStatus() != OrderStatus.ARRIVED)
             throw new OrderDomainException("NOT IN CORRECT STATE FOR CONFIRM ORDER");
         return OrderDetail.builder()
+                .orderID(id)
                 .id(id.toString().concat("5"))
                 .orderStatus(OrderStatus.CONFIRMED)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
@@ -86,6 +92,7 @@ public class Order {
         if(details.peek().getOrderStatus() != OrderStatus.FINISHED)
             throw new OrderDomainException("NOT IN CORRECT STATE FOR FINISH ORDER");
         return OrderDetail.builder()
+                .orderID(id)
                 .id(id.toString().concat("6"))
                 .orderStatus(OrderStatus.FINISHED)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
@@ -97,6 +104,7 @@ public class Order {
         if(details.peek().getOrderStatus() != OrderStatus.PENDING)
             throw new OrderDomainException("NOT IN CORRECT STATE FOR CANCEL ORDER");
         details.add(OrderDetail.builder()
+                .orderID(id)
                 .id(id.toString().concat("7"))
                 .orderStatus(OrderStatus.CANCELLED)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
@@ -104,5 +112,13 @@ public class Order {
                 .build());
 
         return order;
+    }
+
+    private void initializeOrderItems(){
+        int orderItemID = 1;
+        for(OrderItem orderItem : items){
+            orderItem.initializeOrderItem(orderItemID);
+        }
+
     }
 }

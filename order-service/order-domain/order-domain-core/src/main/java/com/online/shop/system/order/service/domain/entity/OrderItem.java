@@ -11,8 +11,14 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class OrderItem {
 
+
     private Integer id;
     private final Product product;
     private final int quantity;
     private BigDecimal subTotal;
+
+
+    void initializeOrderItem(Integer id){
+        this.id = id;
+    }
 }

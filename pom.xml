@@ -150,6 +150,16 @@
             </dependency>
             <dependency>
                 <groupId>com.online.shop.system</groupId>
+                <artifactId>order-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>order-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
                 <artifactId>kafka-config-data</artifactId>
                 <version>${project.version}</version>
             </dependency>

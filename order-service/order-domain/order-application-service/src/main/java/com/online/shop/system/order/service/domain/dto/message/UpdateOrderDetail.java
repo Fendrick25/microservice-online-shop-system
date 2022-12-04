@@ -1,23 +1,18 @@
-package com.online.shop.system.order.service.domain.entity;
+package com.online.shop.system.order.service.domain.dto.message;
 
 import com.online.shop.system.order.service.domain.valueobject.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
-import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class OrderDetail {
-
+public class UpdateOrderDetail {
     private UUID orderID;
-    private String id;
-    private final OrderStatus orderStatus;
-    private ZonedDateTime createdAt;
-    @Setter
+    private UUID userID;
+    private OrderStatus orderStatus;
     private String message;
 }

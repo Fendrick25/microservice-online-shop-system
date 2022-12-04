@@ -3,5 +3,5 @@ package com.online.shop.system.user.service.domain.ports.output.message.publishe
 import com.online.shop.system.user.service.domain.dto.message.UserCreatedEvent;
 
 public interface UserMessagePublisher {
-    void send(UserCreatedEvent userCreatedEvent);
+    void publish(UserCreatedEvent userCreatedEvent);
 }

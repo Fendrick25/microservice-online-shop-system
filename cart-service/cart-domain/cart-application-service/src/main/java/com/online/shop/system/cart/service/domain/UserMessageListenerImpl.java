@@ -15,7 +15,7 @@ public class UserMessageListenerImpl implements UserMessageListener {
     private final CartApplicationService cartApplicationService;
 
     @Override
-    public void UserCreated(User user) {
+    public void userCreated(User user) {
         cartApplicationService.createCart(user);
     }
 }

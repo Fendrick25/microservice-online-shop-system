@@ -35,7 +35,7 @@ public class UserMessageKafkaListener implements KafkaConsumer<UserAvroModel> {
                 offsets.toString());
 
         messages.forEach(userAvroModel ->
-                userMessageListener.UserCreated(cartMessagingDataMapper.userAvroModelToUser(userAvroModel)));
+                userMessageListener.userCreated(cartMessagingDataMapper.userAvroModelToUser(userAvroModel)));
 
     }
 }

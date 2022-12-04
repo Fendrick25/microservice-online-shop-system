@@ -24,7 +24,7 @@ public class UserMessagePublisherImpl implements UserMessagePublisher {
     private final UserMessagingDataMapper userMessagingDataMapper;
 
     @Override
-    public void send(UserCreatedEvent userCreatedEvent) {
+    public void publish(UserCreatedEvent userCreatedEvent) {
         String id = UUID.randomUUID().toString();
         UserAvroModel userAvroModel = userMessagingDataMapper.userCreatedEventToUserAvroModel(userCreatedEvent);
 

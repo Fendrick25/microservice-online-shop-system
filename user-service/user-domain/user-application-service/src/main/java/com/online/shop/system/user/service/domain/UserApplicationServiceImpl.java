@@ -31,7 +31,7 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     @Override
     public UserIDResponse createUser(CreateUser createUser) {
         User user = userRepository.createUser(userDomainService.validateUser(userDataMapper.createUserToUser(createUser)));
-        userMessagePublisher.send(userDataMapper.userToUserCreatedEvent(user));
+        userMessagePublisher.publish(userDataMapper.userToUserCreatedEvent(user));
         return userDataMapper.userToUserIDResponse(user);
     }
 
