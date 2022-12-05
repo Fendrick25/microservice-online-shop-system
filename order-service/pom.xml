@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>order-domain</module>
+        <module>order-dataaccess</module>
     </modules>
     <artifactId>order-service</artifactId>
 

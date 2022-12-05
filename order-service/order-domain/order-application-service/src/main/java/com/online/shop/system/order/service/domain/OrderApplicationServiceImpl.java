@@ -51,34 +51,6 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
     }
 
     @Override
-    public void orderPaid(UpdateOrderDetail updateOrderDetail) {
-        Order order = orderRepository.getOrder(updateOrderDetail.getOrderID());
-        orderRepository.updateOrderDetail(orderDomainService.orderPaid(order));
-        log.info("Order with id: {} paid", order.getId());
-    }
-
-    @Override
-    public void orderShipped(UpdateOrderDetail updateOrderDetail) {
-        Order order = orderRepository.getOrder(updateOrderDetail.getOrderID());
-        orderRepository.updateOrderDetail(orderDomainService.orderShipped(order));
-        log.info("Order with id: {} shipped", order.getId());
-    }
-
-    @Override
-    public void orderArrived(UpdateOrderDetail updateOrderDetail) {
-        Order order = orderRepository.getOrder(updateOrderDetail.getOrderID());
-        orderRepository.updateOrderDetail(orderDomainService.orderArrived(order, updateOrderDetail.getMessage()));
-        log.info("Order with id: {} arrived", order.getId());
-    }
-
-    @Override
-    public void orderConfirmed(UpdateOrderDetail updateOrderDetail) {
-        Order order = orderRepository.getOrder(updateOrderDetail.getOrderID());
-        orderRepository.updateOrderDetail(orderDomainService.orderConfirmed(order));
-        log.info("Order with id: {} confirmed", order.getId());
-    }
-
-    @Override
     public void orderFinished(UpdateOrderDetail updateOrderDetail) {
         Order order = orderRepository.getOrder(updateOrderDetail.getOrderID());
         orderRepository.updateOrderDetail(orderDomainService.orderFinished(order));

@@ -69,7 +69,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .data(pageProducts.getContent().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList()))
                 .currentPage(pageProducts.getNumber() + 1)
                 .size(pageProducts.getSize())
-                .total(((int) pageProducts.getTotalElements()))
+                .total((int) pageProducts.getTotalElements())
                 .totalPages(pageProducts.getTotalPages())
                 .build();
     }
@@ -82,7 +82,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .data(pageProducts.getContent().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList()))
                 .currentPage(pageProducts.getNumber() + 1)
                 .size(pageProducts.getSize())
-                .total(((int) pageProducts.getTotalElements()))
+                .total((int) pageProducts.getTotalElements())
                 .totalPages(pageProducts.getTotalPages())
                 .build();
     }
