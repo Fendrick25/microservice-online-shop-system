@@ -1,0 +1,30 @@
+{
+  "namespace": "com.online.shop.system.kafka.avro.model",
+  "type": "record",
+  "name": "PaymentRequestAvroModel",
+  "fields": [
+    {
+      "name": "orderID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "price",
+      "type": {
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 10,
+        "scale": 2
+      }
+    },
+    {
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "local-timestamp-millis"
+      }
+    }
+  ]
+}

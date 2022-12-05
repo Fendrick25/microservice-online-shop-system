@@ -1,0 +1,22 @@
+{
+  "namespace": "com.online.shop.system.kafka.avro.model",
+  "type": "record",
+  "name": "PaymentResponseAvroModel",
+  "fields": [
+    {
+      "name": "orderID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "orderStatus",
+      "type": {
+        "type": "enum",
+        "name": "paymentOrderStatus",
+        "symbols": ["PAID", "CANCELLED"]
+      }
+    }
+  ]
+}

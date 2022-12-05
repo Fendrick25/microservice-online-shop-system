@@ -1,0 +1,166 @@
+{
+  "namespace": "com.online.shop.system.kafka.avro.model",
+  "type": "record",
+  "name": "OrderAvroModel",
+  "fields": [
+    {
+      "name": "id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "userID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "items",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "OrderItem",
+          "type": "record",
+          "fields": [
+            {
+              "name": "id",
+              "type": "int"
+            },
+            {
+              "name": "product",
+              "type": {
+                "type": "record",
+                "name": "Product",
+                "fields": [
+                  {
+                    "name": "id",
+                    "type": {
+                      "type": "string",
+                      "logicalType": "uuid"
+                    }
+                  },
+                  {
+                    "name": "name",
+                    "type": "string"
+                  },
+                  {
+                    "name": "description",
+                    "type": "string"
+                  },
+                  {
+                    "name": "price",
+                    "type": {
+                      "type": "bytes",
+                      "logicalType": "decimal",
+                      "precision": 10,
+                      "scale": 2
+                    }
+                  },
+                  {
+                    "name": "imageUrl",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "quantity",
+              "type": "int"
+            },
+            {
+              "name": "subTotal",
+              "type": {
+                "type": "bytes",
+                "logicalType": "decimal",
+                "precision": 10,
+                "scale": 2
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "totalPrice",
+      "type": {
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 10,
+        "scale": 2
+      }
+    },
+    {
+      "name": "purchasedAt",
+      "type": {
+        "type": "long",
+        "logicalType": "local-timestamp-millis"
+      }
+    },
+    {
+      "name": "orderAddress",
+      "type": {
+        "name": "OrderAddress",
+        "type": "record",
+        "fields": [
+          {
+            "name": "street",
+            "type": "string"
+          },
+          {
+            "name": "postalCode",
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "details",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "OrderDetail",
+          "type": "record",
+          "fields": [
+            {
+              "name": "orderID",
+              "type": {
+                "type": "string",
+                "logicalType": "uuid"
+              }
+            },
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "orderStatus",
+              "type": {
+                "type": "enum",
+                "name": "OrderStatus",
+                "symbols": ["PENDING", "PAID", "SHIPPED", "ARRIVED", "CONFIRMED", "FINISHED", "CANCELLED"]
+              }
+            },
+            {
+              "name": "createdAt",
+              "type": {
+                "type": "long",
+                "logicalType": "local-timestamp-millis"
+              }
+            },
+            {
+              "name": "message",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
