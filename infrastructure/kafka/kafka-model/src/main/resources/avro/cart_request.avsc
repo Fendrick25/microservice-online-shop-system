@@ -1,22 +1,20 @@
 {
   "namespace": "com.online.shop.system.kafka.avro.model",
   "type": "record",
-  "name": "PaymentRequestAvroModel",
+  "name": "CartRequestAvroModel",
   "fields": [
     {
-      "name": "orderID",
+      "name": "cartID",
       "type": {
         "type": "string",
         "logicalType": "uuid"
       }
     },
     {
-      "name": "price",
+      "name": "userID",
       "type": {
-        "type": "bytes",
-        "logicalType": "decimal",
-        "precision": 10,
-        "scale": 2
+        "type": "string",
+        "logicalType": "uuid"
       }
     }
   ]

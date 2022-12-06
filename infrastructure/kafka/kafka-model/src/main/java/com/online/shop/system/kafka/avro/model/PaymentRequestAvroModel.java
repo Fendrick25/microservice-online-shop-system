@@ -14,15 +14,14 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5513681760278784333L;
+  private static final long serialVersionUID = -3141340840492967861L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentRequestAvroModel\",\"namespace\":\"com.online.shop.system.kafka.avro.model\",\"fields\":[{\"name\":\"orderID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"price\",\"type\":{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":2}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentRequestAvroModel\",\"namespace\":\"com.online.shop.system.kafka.avro.model\",\"fields\":[{\"name\":\"orderID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"price\",\"type\":{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":2}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
   static {
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.LocalTimestampMillisConversion());
     MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.DecimalConversion());
   }
 
@@ -79,7 +78,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
 
   private java.lang.String orderID;
   private java.math.BigDecimal price;
-  private java.time.LocalDateTime createdAt;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -92,12 +90,10 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
    * All-args constructor.
    * @param orderID The new value for orderID
    * @param price The new value for price
-   * @param createdAt The new value for createdAt
    */
-  public PaymentRequestAvroModel(java.lang.String orderID, java.math.BigDecimal price, java.time.LocalDateTime createdAt) {
+  public PaymentRequestAvroModel(java.lang.String orderID, java.math.BigDecimal price) {
     this.orderID = orderID;
     this.price = price;
-    this.createdAt = createdAt;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -107,7 +103,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
     switch (field$) {
     case 0: return orderID;
     case 1: return price;
-    case 2: return createdAt;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -116,7 +111,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       new org.apache.avro.Conversion<?>[] {
       null,
       new org.apache.avro.Conversions.DecimalConversion(),
-      new org.apache.avro.data.TimeConversions.LocalTimestampMillisConversion(),
       null
   };
 
@@ -131,7 +125,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
     switch (field$) {
     case 0: orderID = value$ != null ? value$.toString() : null; break;
     case 1: price = (java.math.BigDecimal)value$; break;
-    case 2: createdAt = (java.time.LocalDateTime)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -168,23 +161,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
    */
   public void setPrice(java.math.BigDecimal value) {
     this.price = value;
-  }
-
-  /**
-   * Gets the value of the 'createdAt' field.
-   * @return The value of the 'createdAt' field.
-   */
-  public java.time.LocalDateTime getCreatedAt() {
-    return createdAt;
-  }
-
-
-  /**
-   * Sets the value of the 'createdAt' field.
-   * @param value the value to set.
-   */
-  public void setCreatedAt(java.time.LocalDateTime value) {
-    this.createdAt = value;
   }
 
   /**
@@ -230,7 +206,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
 
     private java.lang.String orderID;
     private java.math.BigDecimal price;
-    private java.time.LocalDateTime createdAt;
 
     /** Creates a new Builder */
     private Builder() {
@@ -251,10 +226,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
         this.price = data().deepCopy(fields()[1].schema(), other.price);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[2].schema(), other.createdAt);
-        fieldSetFlags()[2] = other.fieldSetFlags()[2];
-      }
     }
 
     /**
@@ -270,10 +241,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       if (isValidValue(fields()[1], other.price)) {
         this.price = data().deepCopy(fields()[1].schema(), other.price);
         fieldSetFlags()[1] = true;
-      }
-      if (isValidValue(fields()[2], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[2].schema(), other.createdAt);
-        fieldSetFlags()[2] = true;
       }
     }
 
@@ -357,45 +324,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       return this;
     }
 
-    /**
-      * Gets the value of the 'createdAt' field.
-      * @return The value.
-      */
-    public java.time.LocalDateTime getCreatedAt() {
-      return createdAt;
-    }
-
-
-    /**
-      * Sets the value of the 'createdAt' field.
-      * @param value The value of 'createdAt'.
-      * @return This builder.
-      */
-    public com.online.shop.system.kafka.avro.model.PaymentRequestAvroModel.Builder setCreatedAt(java.time.LocalDateTime value) {
-      validate(fields()[2], value);
-      this.createdAt = value;
-      fieldSetFlags()[2] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'createdAt' field has been set.
-      * @return True if the 'createdAt' field has been set, false otherwise.
-      */
-    public boolean hasCreatedAt() {
-      return fieldSetFlags()[2];
-    }
-
-
-    /**
-      * Clears the value of the 'createdAt' field.
-      * @return This builder.
-      */
-    public com.online.shop.system.kafka.avro.model.PaymentRequestAvroModel.Builder clearCreatedAt() {
-      fieldSetFlags()[2] = false;
-      return this;
-    }
-
     @Override
     @SuppressWarnings("unchecked")
     public PaymentRequestAvroModel build() {
@@ -403,7 +331,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
         PaymentRequestAvroModel record = new PaymentRequestAvroModel();
         record.orderID = fieldSetFlags()[0] ? this.orderID : (java.lang.String) defaultValue(fields()[0]);
         record.price = fieldSetFlags()[1] ? this.price : (java.math.BigDecimal) defaultValue(fields()[1]);
-        record.createdAt = fieldSetFlags()[2] ? this.createdAt : (java.time.LocalDateTime) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

@@ -12,6 +12,7 @@ import java.util.UUID;
 public interface OrderRepository {
     UUID createOrder(Order order);
     Order getOrder(UUID orderID);
+    UUID updateOrder(Order order);
     void updateOrderDetail(OrderDetail orderDetail);
     PagingResponse getAllOrder(UUID userID, int page, int size);
     PagingResponse getOrderByDate(UUID userID, Date startDate, Date endDate, int page, int size);

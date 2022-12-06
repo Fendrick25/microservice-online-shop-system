@@ -12,6 +12,7 @@
     <modules>
         <module>order-domain</module>
         <module>order-dataaccess</module>
+        <module>order-application</module>
     </modules>
     <artifactId>order-service</artifactId>
 

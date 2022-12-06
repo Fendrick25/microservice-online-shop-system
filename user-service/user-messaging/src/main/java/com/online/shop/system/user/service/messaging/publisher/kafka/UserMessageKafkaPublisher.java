@@ -16,7 +16,7 @@ import java.util.UUID;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class UserMessagePublisherImpl implements UserMessagePublisher {
+public class UserMessageKafkaPublisher implements UserMessagePublisher {
 
     private final KafkaProducer<String, UserAvroModel> kafkaProducer;
     private final UserServiceConfigData userServiceConfigData;

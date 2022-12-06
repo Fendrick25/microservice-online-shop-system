@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.UUID;
@@ -40,6 +41,17 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
+    @Transactional
+    public UUID updateOrder(Order order) {
+        OrderEntity orderEntity = findOrder(order.getId());
+        OrderEntity orderEntityUpdated = orderDataAccessMapper.orderToOrderEntity(order);
+        orderEntityUpdated.setId(orderEntity.getId());
+        orderEntityUpdated.setUser(orderEntity.getUser());
+        return orderJpaRepository.save(orderEntityUpdated).getId();
+    }
+
+    @Override
+    @Transactional
     public void updateOrderDetail(OrderDetail orderDetail) {
         OrderEntity orderEntity = findOrder(orderDetail.getOrderID());
         OrderDetailEntity orderDetailEntity = orderDataAccessMapper.orderDetailToOrderDetailEntity(orderDetail);

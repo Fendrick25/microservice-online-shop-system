@@ -5,18 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class UpdateOrderDetail {
-    @NotNull
-    private UUID orderID;
-    @NotNull
-    private UUID userID;
-    @NotNull
-    private OrderStatus orderStatus;
-    private String message;
+public class PaymentResponse {
+    private final UUID orderID;
+    private final OrderStatus orderStatus;
 }

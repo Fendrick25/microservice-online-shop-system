@@ -74,6 +74,12 @@ public class CartApplicationServiceImpl implements CartApplicationService {
     }
 
     @Override
+    public void emptyCart(UUID cartID) {
+        cartRepository.emptyCart(cartID);
+        log.info("Cart item deleted for cart id: {}", cartID);
+    }
+
+    @Override
     public void deleteCartItem(Integer cartItemID) {
         cartRepository.deleteCartItem(cartItemID);
         log.info("Cart item with id: {} deleted", cartItemID);

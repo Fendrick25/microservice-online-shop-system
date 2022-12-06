@@ -2,19 +2,18 @@ package com.online.shop.system.order.service.domain;
 
 import com.online.shop.system.order.service.domain.entity.Order;
 import com.online.shop.system.order.service.domain.entity.OrderDetail;
-import com.online.shop.system.order.service.domain.event.OrderEvent;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 public class OrderDomainServiceImpl implements OrderDomainService{
 
     @Override
-    public OrderEvent initializeOrder(Order order) {
+    public Order initializeOrder(Order order) {
         order.initializeOrder();
-        return OrderEvent.builder()
-                .order(order)
-                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
-                .build();
+        return order;
+    }
+
+    @Override
+    public void orderVerified(Order order) {
+        order.verifyOrder();
     }
 
     @Override
@@ -43,11 +42,7 @@ public class OrderDomainServiceImpl implements OrderDomainService{
     }
 
     @Override
-    public OrderEvent orderCancelled(Order order, String message) {
-        Order updatedOrder = order.cancelOrder(order, message);
-        return OrderEvent.builder()
-                .order(updatedOrder)
-                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
-                .build();
+    public OrderDetail orderCancelled(Order order, String message) {
+        return order.cancelOrder(order, message);
     }
 }

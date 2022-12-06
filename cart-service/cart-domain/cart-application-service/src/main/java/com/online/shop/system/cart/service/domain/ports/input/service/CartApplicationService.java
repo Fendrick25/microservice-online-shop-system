@@ -14,6 +14,7 @@ public interface CartApplicationService {
     void createCart(User user);
     CartIDResponse addCartItem(@Validated AddCartItem addCartItem);
     CartIDResponse updateCartItem(@Validated UpdateCartItem updateCartItem);
+    void emptyCart(UUID cartID);
     void deleteCartItem(Integer cartItemID);
     GetCartResponse getCart(UUID userID);
 }

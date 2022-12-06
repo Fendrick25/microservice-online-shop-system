@@ -12,6 +12,6 @@ public interface CartRepository {
     CartItem updateCartItem(CartItem cartItem);
     void deleteCartItem(Integer cartItemID);
     Cart getCart(UUID userID);
-
     void updateCart(Cart cart);
+    void emptyCart(UUID cartID);
 }

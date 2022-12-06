@@ -8,5 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "cart-service")
 public class CartServiceConfigData {
-    private String cartTopicName;
+    private String userTopicName;
+    private String cartRequestTopicName;
+    private String cartResponseTopicName;
 }

@@ -1,6 +1,9 @@
 package com.online.shop.system.order.service.domain.mapper;
 
+import com.online.shop.system.order.service.domain.dto.create.CreateOrder;
 import com.online.shop.system.order.service.domain.dto.create.response.GetOrderResponse;
+import com.online.shop.system.order.service.domain.dto.message.CartOrderResponse;
+import com.online.shop.system.order.service.domain.dto.message.PaymentRequest;
 import com.online.shop.system.order.service.domain.entity.Order;
 import com.online.shop.system.order.service.domain.entity.OrderDetail;
 import com.online.shop.system.order.service.domain.entity.OrderItem;
@@ -20,6 +23,13 @@ public class OrderDataMapper {
                 .orderAddress(order.getAddress())
                 .details(order.getDetails().stream().map(this::orderDetailToGetOrderResponseOrderDetail)
                         .collect(Collectors.toList()))
+                .build();
+    }
+
+    public Order createOrderToOrder(CreateOrder createOrder){
+        return Order.builder()
+                .userID(createOrder.getUserID())
+                .address(createOrder.getOrderAddress())
                 .build();
     }
 

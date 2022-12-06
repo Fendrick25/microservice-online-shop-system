@@ -1,7 +1,9 @@
 package com.online.shop.system.order.service.domain.ports.output.message.publisher;
 
-import com.online.shop.system.order.service.domain.event.OrderEvent;
+import com.online.shop.system.order.service.domain.dto.message.PaymentRequest;
+import com.online.shop.system.order.service.domain.event.OrderCancelledEvent;
 
 public interface PaymentMessagePublisher {
-    void publish(OrderEvent orderEvent);
+    void requestPayment(PaymentRequest paymentRequest);
+    void cancelPayment(OrderCancelledEvent orderCancelledEvent);
 }
