@@ -8,7 +8,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CartRequest {
-
+    private UUID orderID;
     private UUID cartID;
     private UUID userID;
 }

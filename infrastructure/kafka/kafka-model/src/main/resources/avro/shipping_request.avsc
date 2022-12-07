@@ -1,0 +1,35 @@
+{
+  "namespace": "com.online.shop.system.kafka.avro.model",
+  "type": "record",
+  "name": "ShippingRequestAvroModel",
+  "fields": [
+    {
+      "name": "orderID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "orderAddress",
+      "type": {
+        "name": "OrderAddress",
+        "type": "record",
+        "fields": [
+          {
+            "name": "street",
+            "type": "string"
+          },
+          {
+            "name": "postalCode",
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 {
   "namespace": "com.online.shop.system.kafka.avro.model",
   "type": "record",
-  "name": "OrderAvroModel",
+  "name": "CartOrderResponseAvroModel",
   "fields": [
     {
-      "name": "id",
+      "name": "orderID",
       "type": {
         "type": "string",
         "logicalType": "uuid"
@@ -90,76 +90,6 @@
         "logicalType": "decimal",
         "precision": 10,
         "scale": 2
-      }
-    },
-    {
-      "name": "purchasedAt",
-      "type": {
-        "type": "long",
-        "logicalType": "local-timestamp-millis"
-      }
-    },
-    {
-      "name": "orderAddress",
-      "type": {
-        "name": "OrderAddress",
-        "type": "record",
-        "fields": [
-          {
-            "name": "street",
-            "type": "string"
-          },
-          {
-            "name": "postalCode",
-            "type": "string"
-          },
-          {
-            "name": "city",
-            "type": "string"
-          }
-        ]
-      }
-    },
-    {
-      "name": "details",
-      "type": {
-        "type": "array",
-        "items": {
-          "name": "OrderDetail",
-          "type": "record",
-          "fields": [
-            {
-              "name": "orderID",
-              "type": {
-                "type": "string",
-                "logicalType": "uuid"
-              }
-            },
-            {
-              "name": "id",
-              "type": "string"
-            },
-            {
-              "name": "orderStatus",
-              "type": {
-                "type": "enum",
-                "name": "OrderStatus",
-                "symbols": ["PENDING", "PAID", "SHIPPED", "ARRIVED", "CONFIRMED", "FINISHED", "CANCELLED"]
-              }
-            },
-            {
-              "name": "createdAt",
-              "type": {
-                "type": "long",
-                "logicalType": "local-timestamp-millis"
-              }
-            },
-            {
-              "name": "message",
-              "type": "string"
-            }
-          ]
-        }
       }
     }
   ]

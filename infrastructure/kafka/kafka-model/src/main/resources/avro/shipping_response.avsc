@@ -1,0 +1,22 @@
+{
+  "namespace": "com.online.shop.system.kafka.avro.model",
+  "type": "record",
+  "name": "ShippingResponseAvroModel",
+  "fields": [
+    {
+      "name": "orderID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "ShippingStatus",
+      "type": {
+        "type": "enum",
+        "name": "ShippingStatus",
+        "symbols": ["SHIPPED", "ARRIVED"]
+      }
+    }
+  ]
+}

@@ -12,5 +12,5 @@ import java.util.UUID;
 public interface OrderJpaRepository extends JpaRepository<OrderEntity, UUID> {
     Page<OrderEntity> findByUserId(UUID userID, Pageable pageable);
     Page<OrderEntity> findByUserIdAndPurchaseDateBetween(UUID userID, Date startDate, Date endDate, Pageable pageable);
-    Page<OrderEntity> findByUserIdAndOrderStatus(UUID userID, OrderStatus orderStatus, Pageable pageable);
+    Page<OrderEntity> findByUserIdAndOrderDetailsOrderStatus(UUID userID, OrderStatus orderStatus, Pageable pageable);
 }

@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 7184794493948368482L;
+  private static final long serialVersionUID = 2601243286812368211L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentResponseAvroModel\",\"namespace\":\"com.online.shop.system.kafka.avro.model\",\"fields\":[{\"name\":\"orderID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"orderStatus\",\"type\":{\"type\":\"enum\",\"name\":\"paymentOrderStatus\",\"symbols\":[\"PAID\",\"CANCELLED\"]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentResponseAvroModel\",\"namespace\":\"com.online.shop.system.kafka.avro.model\",\"fields\":[{\"name\":\"orderID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"paymentStatus\",\"type\":{\"type\":\"enum\",\"name\":\"PaymentStatus\",\"symbols\":[\"WAITING_FOR_PAYMENT\",\"CANCELLED\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -74,7 +74,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
   }
 
   private java.lang.String orderID;
-  private com.online.shop.system.kafka.avro.model.paymentOrderStatus orderStatus;
+  private com.online.shop.system.kafka.avro.model.PaymentStatus paymentStatus;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -86,11 +86,11 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
   /**
    * All-args constructor.
    * @param orderID The new value for orderID
-   * @param orderStatus The new value for orderStatus
+   * @param paymentStatus The new value for paymentStatus
    */
-  public PaymentResponseAvroModel(java.lang.String orderID, com.online.shop.system.kafka.avro.model.paymentOrderStatus orderStatus) {
+  public PaymentResponseAvroModel(java.lang.String orderID, com.online.shop.system.kafka.avro.model.PaymentStatus paymentStatus) {
     this.orderID = orderID;
-    this.orderStatus = orderStatus;
+    this.paymentStatus = paymentStatus;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -99,7 +99,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return orderID;
-    case 1: return orderStatus;
+    case 1: return paymentStatus;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -121,7 +121,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: orderID = value$ != null ? value$.toString() : null; break;
-    case 1: orderStatus = (com.online.shop.system.kafka.avro.model.paymentOrderStatus)value$; break;
+    case 1: paymentStatus = (com.online.shop.system.kafka.avro.model.PaymentStatus)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -144,20 +144,20 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
   }
 
   /**
-   * Gets the value of the 'orderStatus' field.
-   * @return The value of the 'orderStatus' field.
+   * Gets the value of the 'paymentStatus' field.
+   * @return The value of the 'paymentStatus' field.
    */
-  public com.online.shop.system.kafka.avro.model.paymentOrderStatus getOrderStatus() {
-    return orderStatus;
+  public com.online.shop.system.kafka.avro.model.PaymentStatus getPaymentStatus() {
+    return paymentStatus;
   }
 
 
   /**
-   * Sets the value of the 'orderStatus' field.
+   * Sets the value of the 'paymentStatus' field.
    * @param value the value to set.
    */
-  public void setOrderStatus(com.online.shop.system.kafka.avro.model.paymentOrderStatus value) {
-    this.orderStatus = value;
+  public void setPaymentStatus(com.online.shop.system.kafka.avro.model.PaymentStatus value) {
+    this.paymentStatus = value;
   }
 
   /**
@@ -202,7 +202,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
     implements org.apache.avro.data.RecordBuilder<PaymentResponseAvroModel> {
 
     private java.lang.String orderID;
-    private com.online.shop.system.kafka.avro.model.paymentOrderStatus orderStatus;
+    private com.online.shop.system.kafka.avro.model.PaymentStatus paymentStatus;
 
     /** Creates a new Builder */
     private Builder() {
@@ -219,8 +219,8 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
         this.orderID = data().deepCopy(fields()[0].schema(), other.orderID);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.orderStatus)) {
-        this.orderStatus = data().deepCopy(fields()[1].schema(), other.orderStatus);
+      if (isValidValue(fields()[1], other.paymentStatus)) {
+        this.paymentStatus = data().deepCopy(fields()[1].schema(), other.paymentStatus);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
     }
@@ -235,8 +235,8 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
         this.orderID = data().deepCopy(fields()[0].schema(), other.orderID);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.orderStatus)) {
-        this.orderStatus = data().deepCopy(fields()[1].schema(), other.orderStatus);
+      if (isValidValue(fields()[1], other.paymentStatus)) {
+        this.paymentStatus = data().deepCopy(fields()[1].schema(), other.paymentStatus);
         fieldSetFlags()[1] = true;
       }
     }
@@ -282,41 +282,41 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
     }
 
     /**
-      * Gets the value of the 'orderStatus' field.
+      * Gets the value of the 'paymentStatus' field.
       * @return The value.
       */
-    public com.online.shop.system.kafka.avro.model.paymentOrderStatus getOrderStatus() {
-      return orderStatus;
+    public com.online.shop.system.kafka.avro.model.PaymentStatus getPaymentStatus() {
+      return paymentStatus;
     }
 
 
     /**
-      * Sets the value of the 'orderStatus' field.
-      * @param value The value of 'orderStatus'.
+      * Sets the value of the 'paymentStatus' field.
+      * @param value The value of 'paymentStatus'.
       * @return This builder.
       */
-    public com.online.shop.system.kafka.avro.model.PaymentResponseAvroModel.Builder setOrderStatus(com.online.shop.system.kafka.avro.model.paymentOrderStatus value) {
+    public com.online.shop.system.kafka.avro.model.PaymentResponseAvroModel.Builder setPaymentStatus(com.online.shop.system.kafka.avro.model.PaymentStatus value) {
       validate(fields()[1], value);
-      this.orderStatus = value;
+      this.paymentStatus = value;
       fieldSetFlags()[1] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'orderStatus' field has been set.
-      * @return True if the 'orderStatus' field has been set, false otherwise.
+      * Checks whether the 'paymentStatus' field has been set.
+      * @return True if the 'paymentStatus' field has been set, false otherwise.
       */
-    public boolean hasOrderStatus() {
+    public boolean hasPaymentStatus() {
       return fieldSetFlags()[1];
     }
 
 
     /**
-      * Clears the value of the 'orderStatus' field.
+      * Clears the value of the 'paymentStatus' field.
       * @return This builder.
       */
-    public com.online.shop.system.kafka.avro.model.PaymentResponseAvroModel.Builder clearOrderStatus() {
-      orderStatus = null;
+    public com.online.shop.system.kafka.avro.model.PaymentResponseAvroModel.Builder clearPaymentStatus() {
+      paymentStatus = null;
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -327,7 +327,7 @@ public class PaymentResponseAvroModel extends org.apache.avro.specific.SpecificR
       try {
         PaymentResponseAvroModel record = new PaymentResponseAvroModel();
         record.orderID = fieldSetFlags()[0] ? this.orderID : (java.lang.String) defaultValue(fields()[0]);
-        record.orderStatus = fieldSetFlags()[1] ? this.orderStatus : (com.online.shop.system.kafka.avro.model.paymentOrderStatus) defaultValue(fields()[1]);
+        record.paymentStatus = fieldSetFlags()[1] ? this.paymentStatus : (com.online.shop.system.kafka.avro.model.PaymentStatus) defaultValue(fields()[1]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

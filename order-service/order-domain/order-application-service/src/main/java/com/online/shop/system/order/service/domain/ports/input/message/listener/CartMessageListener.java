@@ -4,5 +4,5 @@ import com.online.shop.system.order.service.domain.dto.message.CartOrderResponse
 
 public interface CartMessageListener {
 
-    void createOrder(CartOrderResponse createOrder);
+    void createOrder(CartOrderResponse cartOrderResponse);
 }

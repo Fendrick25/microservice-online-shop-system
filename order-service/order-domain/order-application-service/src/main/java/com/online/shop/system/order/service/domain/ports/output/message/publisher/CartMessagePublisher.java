@@ -1,7 +1,7 @@
 package com.online.shop.system.order.service.domain.ports.output.message.publisher;
 
-import com.online.shop.system.order.service.domain.dto.create.CreateOrder;
+import com.online.shop.system.order.service.domain.event.OrderRequestEvent;
 
 public interface CartMessagePublisher {
-    void publish(CreateOrder createOrder);
+    void publish(OrderRequestEvent orderRequestEvent);
 }

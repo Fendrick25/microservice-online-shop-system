@@ -4,16 +4,14 @@ import com.online.shop.system.cart.service.domain.dto.create.AddCartItem;
 import com.online.shop.system.cart.service.domain.dto.create.UpdateCartItem;
 import com.online.shop.system.cart.service.domain.dto.create.response.CartIDResponse;
 import com.online.shop.system.cart.service.domain.dto.create.response.GetCartResponse;
-import com.online.shop.system.cart.service.domain.dto.message.CheckProductStock;
-import com.online.shop.system.cart.service.domain.dto.message.CheckProductStockResponse;
-import com.online.shop.system.cart.service.domain.dto.message.GetProductResponse;
-import com.online.shop.system.cart.service.domain.dto.message.User;
+import com.online.shop.system.cart.service.domain.dto.message.*;
 import com.online.shop.system.cart.service.domain.entity.Cart;
 import com.online.shop.system.cart.service.domain.entity.CartItem;
 import com.online.shop.system.cart.service.domain.entity.Product;
 import com.online.shop.system.cart.service.domain.exception.ProductOutOfStockException;
 import com.online.shop.system.cart.service.domain.mapper.CartDataMapper;
 import com.online.shop.system.cart.service.domain.ports.input.service.CartApplicationService;
+import com.online.shop.system.cart.service.domain.ports.output.message.publisher.OrderMessagePublisher;
 import com.online.shop.system.cart.service.domain.ports.output.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,9 +35,8 @@ public class CartApplicationServiceImpl implements CartApplicationService {
 
     private final CartDomainService cartDomainService;
     private final CartRepository cartRepository;
-
     private final CartDataMapper cartDataMapper;
-
+    private final OrderMessagePublisher orderMessagePublisher;
     private final WebClient.Builder webClient;
 
     @Override
@@ -96,6 +93,16 @@ public class CartApplicationServiceImpl implements CartApplicationService {
         log.info("Cart found for user id: {}", updatedCart.getUserID());
         cartRepository.updateCart(cart);
         return cartDataMapper.cartToGetCartResponse(updatedCart);
+
+    }
+
+    @Override
+    public CartOrderResponse requestCart(CartRequest cartRequest) {
+        GetCartResponse getCartResponse = getCart(cartRequest.getUserID());
+        return CartOrderResponse.builder()
+                .orderID(cartRequest.getOrderID())
+                .getCartResponse(getCartResponse)
+                .build();
 
     }
 

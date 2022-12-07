@@ -4,6 +4,13 @@
   "name": "CartRequestAvroModel",
   "fields": [
     {
+      "name": "orderID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
       "name": "cartID",
       "type": {
         "type": "string",

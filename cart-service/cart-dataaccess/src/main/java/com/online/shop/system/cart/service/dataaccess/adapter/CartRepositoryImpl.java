@@ -73,6 +73,12 @@ public class CartRepositoryImpl implements CartRepository {
         cart.getItems().forEach(this::updateCartItem);
     }
 
+    @Override
+    @Transactional
+    public void emptyCart(UUID cartID) {
+        cartItemJpaRepository.deleteAllByCartId(cartID);
+    }
+
     private CartItemEntity findCartItem(Integer cartItemID){
         return cartItemJpaRepository.findById(cartItemID).orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
     }

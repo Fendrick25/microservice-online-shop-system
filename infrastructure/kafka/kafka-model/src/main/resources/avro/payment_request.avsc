@@ -18,6 +18,14 @@
         "precision": 10,
         "scale": 2
       }
+    },
+    {
+      "name": "paymentStatus",
+      "type": {
+        "type": "enum",
+        "name": "PaymentStatus",
+        "symbols": ["WAITING_FOR_PAYMENT", "CANCELLED"]
+      }
     }
   ]
 }

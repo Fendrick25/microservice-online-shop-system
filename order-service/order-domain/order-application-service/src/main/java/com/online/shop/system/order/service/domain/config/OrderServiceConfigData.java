@@ -8,5 +8,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "order-service")
 public class OrderServiceConfigData {
-    private String orderTopicName;
+    private String paymentRequestTopicName;
+    private String paymentResponseTopicName;
+    private String cartRequestTopicName;
+    private String cartResponseTopicName;
+    private String shippingRequestTopicName;
+    private String shippingResponseTopicName;
+    private String userTopicName;
 }

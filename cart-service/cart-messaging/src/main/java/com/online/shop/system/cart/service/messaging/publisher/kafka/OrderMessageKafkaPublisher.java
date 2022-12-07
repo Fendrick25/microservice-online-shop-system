@@ -1,10 +1,10 @@
 package com.online.shop.system.cart.service.messaging.publisher.kafka;
 
 import com.online.shop.system.cart.service.domain.config.CartServiceConfigData;
-import com.online.shop.system.cart.service.domain.entity.Cart;
+import com.online.shop.system.cart.service.domain.dto.message.CartOrderResponse;
 import com.online.shop.system.cart.service.domain.ports.output.message.publisher.OrderMessagePublisher;
 import com.online.shop.system.cart.service.messaging.mapper.CartMessagingDataMapper;
-import com.online.shop.system.kafka.avro.model.OrderAvroModel;
+import com.online.shop.system.kafka.avro.model.CartOrderResponseAvroModel;
 import com.online.shop.system.kafka.producer.KafkaMessageHelper;
 import com.online.shop.system.kafka.producer.service.KafkaProducer;
 import lombok.RequiredArgsConstructor;
@@ -18,27 +18,27 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderMessageKafkaPublisher implements OrderMessagePublisher {
 
-    private final KafkaProducer<String, OrderAvroModel> kafkaProducer;
+    private final KafkaProducer<String, CartOrderResponseAvroModel> kafkaProducer;
     private final CartServiceConfigData cartServiceConfigData;
     private final KafkaMessageHelper kafkaMessageHelper;
     private final CartMessagingDataMapper cartMessagingDataMapper;
 
     @Override
-    public void publish(Cart cart) {
+    public void publish(CartOrderResponse cartOrderResponse) {
 
         String id = UUID.randomUUID().toString();
-        OrderAvroModel orderAvroModel = cartMessagingDataMapper.cartToOrderAvroModel(cart);
+        CartOrderResponseAvroModel cartOrderResponseAvroModel = cartMessagingDataMapper.cartOrderResponseToCartOrderResponseAvroModel(cartOrderResponse);
 
         try{
             kafkaProducer.send(cartServiceConfigData.getCartResponseTopicName(),
                     id,
-                    orderAvroModel,
+                    cartOrderResponseAvroModel,
                     kafkaMessageHelper.getKafkaCallback(cartServiceConfigData.getCartResponseTopicName(),
-                            orderAvroModel));
+                            cartOrderResponseAvroModel));
 
-            log.info("OrderAvroModel sent to kafka for cart id: {} and id: {}", cart.getId(), id);
+            log.info("CartOrderResponseAvroModel sent to kafka for order id: {} and id: {}", cartOrderResponse.getOrderID(), id);
         }catch (Exception e){
-            log.error("Error while sending OrderAvroModel to Kafka with cart id: {} and id: {}, error; {}", cart.getId(), id, e.getMessage());
+            log.error("Error while sending CartOrderResponseAvroModel to Kafka with order id: {} and id: {}, error; {}", cartOrderResponse.getOrderID(), id, e.getMessage());
         }
 
     }

@@ -5,6 +5,8 @@ import com.online.shop.system.cart.service.domain.dto.create.AddCartItem;
 import com.online.shop.system.cart.service.domain.dto.create.UpdateCartItem;
 import com.online.shop.system.cart.service.domain.dto.create.response.CartIDResponse;
 import com.online.shop.system.cart.service.domain.dto.create.response.GetCartResponse;
+import com.online.shop.system.cart.service.domain.dto.message.CartOrderResponse;
+import com.online.shop.system.cart.service.domain.dto.message.CartRequest;
 import com.online.shop.system.cart.service.domain.dto.message.User;
 import org.springframework.validation.annotation.Validated;
 
@@ -17,4 +19,5 @@ public interface CartApplicationService {
     void emptyCart(UUID cartID);
     void deleteCartItem(Integer cartItemID);
     GetCartResponse getCart(UUID userID);
+    CartOrderResponse requestCart(CartRequest cartRequest);
 }

@@ -12,6 +12,7 @@ import com.online.shop.system.order.service.domain.dto.message.UpdateOrderDetail
 import com.online.shop.system.order.service.domain.entity.Order;
 import com.online.shop.system.order.service.domain.entity.OrderDetail;
 import com.online.shop.system.order.service.domain.event.OrderCancelledEvent;
+import com.online.shop.system.order.service.domain.event.OrderRequestEvent;
 import com.online.shop.system.order.service.domain.mapper.OrderDataMapper;
 import com.online.shop.system.order.service.domain.ports.input.service.OrderApplicationService;
 import com.online.shop.system.order.service.domain.ports.output.message.publisher.CartMessagePublisher;
@@ -41,8 +42,13 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
     @Override
     public CreateOrderResponse requestOrder(CreateOrder createOrder) {
         Order order = orderDomainService.initializeOrder(orderDataMapper.createOrderToOrder(createOrder));
-        orderRepository.createOrder(order);
-        cartMessagePublisher.publish(createOrder);
+        UUID id = orderRepository.createOrder(order);
+        cartMessagePublisher.publish(OrderRequestEvent.builder()
+                        .orderID(id)
+                        .cartID(createOrder.getCartID())
+                        .userID(order.getUserID())
+                        .orderAddress(order.getAddress())
+                .build());
         log.info("Order with id: {} created", order.getId());
         return CreateOrderResponse.builder()
                 .orderID(order.getId())
@@ -52,11 +58,16 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
 
     @Override
     public void createOrder(CartOrderResponse cartOrderResponse) {
-        orderDomainService.orderPaid(cartOrderResponse.getOrder());
-        UUID id = orderRepository.updateOrder(cartOrderResponse.getOrder());
+        Order order = orderRepository.getOrder(cartOrderResponse.getOrder().getId());
+        Order orderUpdated = cartOrderResponse.getOrder();
+        orderUpdated.setDetails(order.getDetails());
+        orderUpdated.setAddress(order.getAddress());
+        orderDomainService.orderVerified(orderUpdated);
+        UUID id = orderRepository.updateOrder(orderUpdated);
         paymentMessagePublisher.requestPayment(PaymentRequest.builder()
                         .orderID(id)
                         .price(cartOrderResponse.getOrder().getTotalPrice())
+                        .orderStatus(orderUpdated.getDetails().peek().getOrderStatus())
                 .build());
         log.info("Order with id: {} updated", id);
     }

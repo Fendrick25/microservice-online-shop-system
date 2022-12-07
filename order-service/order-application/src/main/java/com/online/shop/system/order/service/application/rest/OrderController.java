@@ -30,7 +30,7 @@ public class OrderController {
 
 
     @GetMapping("/{orderID}")
-    public ResponseEntity<Data<GetOrderResponse>> getOrder(@PathVariable("orderID")UUID orderID){
+    public ResponseEntity<Data<GetOrderResponse>> getOrder(@PathVariable("orderID") UUID orderID){
         return new ResponseEntity<>(new Data<>(orderApplicationService.getOrder(orderID)), HttpStatus.OK);
     }
 
@@ -46,7 +46,8 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/{userID}")
+    //todo: refactor getAllOrder, getOrderByDate, getOrderByStatus
+    @GetMapping("/user/{userID}")
     public ResponseEntity<PagingResponse> getAllOrder(@PathVariable("userID") UUID userID,
                                                       @RequestParam(defaultValue = "1") int page,
                                                       @RequestParam(defaultValue = "10") int size){
@@ -61,7 +62,7 @@ public class OrderController {
     }
 
     @GetMapping("/status")
-    public ResponseEntity<PagingResponse> getOrderByDate(@RequestBody GetOrderByStatus getOrderByStatus,
+    public ResponseEntity<PagingResponse> getOrderByStatus(@RequestBody GetOrderByStatus getOrderByStatus,
                                                          @RequestParam(defaultValue = "1") int page,
                                                          @RequestParam(defaultValue = "10") int size){
         return new ResponseEntity<>(orderApplicationService.getOrderByStatus(getOrderByStatus, page, size), HttpStatus.OK);

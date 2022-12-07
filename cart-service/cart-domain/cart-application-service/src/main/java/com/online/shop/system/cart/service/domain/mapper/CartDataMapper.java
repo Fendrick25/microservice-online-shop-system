@@ -3,7 +3,7 @@ package com.online.shop.system.cart.service.domain.mapper;
 import com.online.shop.system.cart.service.domain.dto.create.AddCartItem;
 import com.online.shop.system.cart.service.domain.dto.create.UpdateCartItem;
 import com.online.shop.system.cart.service.domain.dto.create.response.GetCartResponse;
-import com.online.shop.system.cart.service.domain.dto.message.CartRequest;
+import com.online.shop.system.cart.service.domain.dto.message.CartOrderResponse;
 import com.online.shop.system.cart.service.domain.dto.message.CheckProductStock;
 import com.online.shop.system.cart.service.domain.dto.message.GetProductResponse;
 import com.online.shop.system.cart.service.domain.entity.Cart;
@@ -90,30 +90,6 @@ public class CartDataMapper {
                 .name(getProductResponse.getName())
                 .price(getProductResponse.getPrice())
                 .imageUrl(getProductResponse.getImageUrl())
-                .build();
-    }
-
-    public Cart getCartResponseToCart(GetCartResponse getCartResponse){
-        return Cart.builder()
-                .id(getCartResponse.getCartID())
-                .userID(getCartResponse.getUserID())
-                .items(getCartResponse.getItems().stream().map(this::getCartResponseItemToCartItem).collect(Collectors.toList()))
-                .totalPrice(getCartResponse.getTotalPrice())
-                .build();
-    }
-
-    private CartItem getCartResponseItemToCartItem(GetCartResponse.Item item){
-        return CartItem.builder()
-                .id(item.getCartItemID())
-                .product(Product.builder()
-                        .id(item.getProduct().getProductID())
-                        .name(item.getProduct().getName())
-                        .description(item.getProduct().getDescription())
-                        .price(item.getProduct().getPrice())
-                        .imageUrl(item.getProduct().getImageUrl())
-                        .build())
-                .quantity(item.getQuantity())
-                .subTotal(item.getSubTotal())
                 .build();
     }
 }

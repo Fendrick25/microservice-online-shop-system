@@ -12,6 +12,9 @@ public class OrderDataAccessMapper {
     public OrderEntity orderToOrderEntity(Order order){
         return OrderEntity.builder()
                 .id(order.getId())
+                .user(UserEntity.builder()
+                        .id(order.getUserID())
+                        .build())
                 .price(order.getTotalPrice())
                 .purchaseDate(order.getPurchaseDate())
                 .user(UserEntity.builder()

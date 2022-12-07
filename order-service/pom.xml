@@ -13,6 +13,8 @@
         <module>order-domain</module>
         <module>order-dataaccess</module>
         <module>order-application</module>
+        <module>order-messaging</module>
+        <module>order-container</module>
     </modules>
     <artifactId>order-service</artifactId>
 

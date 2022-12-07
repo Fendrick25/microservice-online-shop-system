@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface CartItemJpaRepository extends JpaRepository<CartItemEntity, Integer> {
+    void deleteAllByCartId(UUID cartID);
 }

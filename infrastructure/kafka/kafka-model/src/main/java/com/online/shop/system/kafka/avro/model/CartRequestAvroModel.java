@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 7698475428876276518L;
+  private static final long serialVersionUID = 364032021608865086L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CartRequestAvroModel\",\"namespace\":\"com.online.shop.system.kafka.avro.model\",\"fields\":[{\"name\":\"cartID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CartRequestAvroModel\",\"namespace\":\"com.online.shop.system.kafka.avro.model\",\"fields\":[{\"name\":\"orderID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"cartID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userID\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -73,6 +73,7 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     return DECODER.decode(b);
   }
 
+  private java.lang.String orderID;
   private java.lang.String cartID;
   private java.lang.String userID;
 
@@ -85,10 +86,12 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
 
   /**
    * All-args constructor.
+   * @param orderID The new value for orderID
    * @param cartID The new value for cartID
    * @param userID The new value for userID
    */
-  public CartRequestAvroModel(java.lang.String cartID, java.lang.String userID) {
+  public CartRequestAvroModel(java.lang.String orderID, java.lang.String cartID, java.lang.String userID) {
+    this.orderID = orderID;
     this.cartID = cartID;
     this.userID = userID;
   }
@@ -98,14 +101,16 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return cartID;
-    case 1: return userID;
+    case 0: return orderID;
+    case 1: return cartID;
+    case 2: return userID;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
 
   private static final org.apache.avro.Conversion<?>[] conversions =
       new org.apache.avro.Conversion<?>[] {
+      null,
       null,
       null,
       null
@@ -120,10 +125,28 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: cartID = value$ != null ? value$.toString() : null; break;
-    case 1: userID = value$ != null ? value$.toString() : null; break;
+    case 0: orderID = value$ != null ? value$.toString() : null; break;
+    case 1: cartID = value$ != null ? value$.toString() : null; break;
+    case 2: userID = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  /**
+   * Gets the value of the 'orderID' field.
+   * @return The value of the 'orderID' field.
+   */
+  public java.lang.String getOrderID() {
+    return orderID;
+  }
+
+
+  /**
+   * Sets the value of the 'orderID' field.
+   * @param value the value to set.
+   */
+  public void setOrderID(java.lang.String value) {
+    this.orderID = value;
   }
 
   /**
@@ -201,6 +224,7 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<CartRequestAvroModel>
     implements org.apache.avro.data.RecordBuilder<CartRequestAvroModel> {
 
+    private java.lang.String orderID;
     private java.lang.String cartID;
     private java.lang.String userID;
 
@@ -215,13 +239,17 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
      */
     private Builder(com.online.shop.system.kafka.avro.model.CartRequestAvroModel.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.cartID)) {
-        this.cartID = data().deepCopy(fields()[0].schema(), other.cartID);
+      if (isValidValue(fields()[0], other.orderID)) {
+        this.orderID = data().deepCopy(fields()[0].schema(), other.orderID);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.userID)) {
-        this.userID = data().deepCopy(fields()[1].schema(), other.userID);
+      if (isValidValue(fields()[1], other.cartID)) {
+        this.cartID = data().deepCopy(fields()[1].schema(), other.cartID);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
+      }
+      if (isValidValue(fields()[2], other.userID)) {
+        this.userID = data().deepCopy(fields()[2].schema(), other.userID);
+        fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
     }
 
@@ -231,14 +259,58 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
      */
     private Builder(com.online.shop.system.kafka.avro.model.CartRequestAvroModel other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.cartID)) {
-        this.cartID = data().deepCopy(fields()[0].schema(), other.cartID);
+      if (isValidValue(fields()[0], other.orderID)) {
+        this.orderID = data().deepCopy(fields()[0].schema(), other.orderID);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.userID)) {
-        this.userID = data().deepCopy(fields()[1].schema(), other.userID);
+      if (isValidValue(fields()[1], other.cartID)) {
+        this.cartID = data().deepCopy(fields()[1].schema(), other.cartID);
         fieldSetFlags()[1] = true;
       }
+      if (isValidValue(fields()[2], other.userID)) {
+        this.userID = data().deepCopy(fields()[2].schema(), other.userID);
+        fieldSetFlags()[2] = true;
+      }
+    }
+
+    /**
+      * Gets the value of the 'orderID' field.
+      * @return The value.
+      */
+    public java.lang.String getOrderID() {
+      return orderID;
+    }
+
+
+    /**
+      * Sets the value of the 'orderID' field.
+      * @param value The value of 'orderID'.
+      * @return This builder.
+      */
+    public com.online.shop.system.kafka.avro.model.CartRequestAvroModel.Builder setOrderID(java.lang.String value) {
+      validate(fields()[0], value);
+      this.orderID = value;
+      fieldSetFlags()[0] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'orderID' field has been set.
+      * @return True if the 'orderID' field has been set, false otherwise.
+      */
+    public boolean hasOrderID() {
+      return fieldSetFlags()[0];
+    }
+
+
+    /**
+      * Clears the value of the 'orderID' field.
+      * @return This builder.
+      */
+    public com.online.shop.system.kafka.avro.model.CartRequestAvroModel.Builder clearOrderID() {
+      orderID = null;
+      fieldSetFlags()[0] = false;
+      return this;
     }
 
     /**
@@ -256,9 +328,9 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public com.online.shop.system.kafka.avro.model.CartRequestAvroModel.Builder setCartID(java.lang.String value) {
-      validate(fields()[0], value);
+      validate(fields()[1], value);
       this.cartID = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -267,7 +339,7 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       * @return True if the 'cartID' field has been set, false otherwise.
       */
     public boolean hasCartID() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[1];
     }
 
 
@@ -277,7 +349,7 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       */
     public com.online.shop.system.kafka.avro.model.CartRequestAvroModel.Builder clearCartID() {
       cartID = null;
-      fieldSetFlags()[0] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -296,9 +368,9 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public com.online.shop.system.kafka.avro.model.CartRequestAvroModel.Builder setUserID(java.lang.String value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.userID = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -307,7 +379,7 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       * @return True if the 'userID' field has been set, false otherwise.
       */
     public boolean hasUserID() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -317,7 +389,7 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       */
     public com.online.shop.system.kafka.avro.model.CartRequestAvroModel.Builder clearUserID() {
       userID = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -326,8 +398,9 @@ public class CartRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     public CartRequestAvroModel build() {
       try {
         CartRequestAvroModel record = new CartRequestAvroModel();
-        record.cartID = fieldSetFlags()[0] ? this.cartID : (java.lang.String) defaultValue(fields()[0]);
-        record.userID = fieldSetFlags()[1] ? this.userID : (java.lang.String) defaultValue(fields()[1]);
+        record.orderID = fieldSetFlags()[0] ? this.orderID : (java.lang.String) defaultValue(fields()[0]);
+        record.cartID = fieldSetFlags()[1] ? this.cartID : (java.lang.String) defaultValue(fields()[1]);
+        record.userID = fieldSetFlags()[2] ? this.userID : (java.lang.String) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

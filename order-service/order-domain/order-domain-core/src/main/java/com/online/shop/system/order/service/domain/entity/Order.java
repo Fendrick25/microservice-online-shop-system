@@ -6,10 +6,12 @@ import com.online.shop.system.order.service.domain.valueobject.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.UUID;
@@ -21,16 +23,22 @@ public class Order {
 
     private UUID id;
     private final UUID userID;
-    private final List<OrderItem> items;
+
+    @Setter
+    private List<OrderItem> items;
     private final BigDecimal totalPrice;
     private ZonedDateTime purchaseDate;
-    private final OrderAddress address;
-    private Stack<OrderDetail> details;
 
+    @Setter
+    private OrderAddress address;
+
+    @Setter
+    private Stack<OrderDetail> details;
     public void initializeOrder(){
         id = UUID.randomUUID();
         purchaseDate = ZonedDateTime.now(ZoneId.of("UTC"));
-        initializeOrderItems();
+        items = new ArrayList<>();
+        details = new Stack<>();
         details.add(OrderDetail.builder()
                         .orderID(id)
                         .id(id.toString().concat("1"))
@@ -40,12 +48,14 @@ public class Order {
                 .build());
     }
 
+
     public void verifyOrder(){
+        purchaseDate = ZonedDateTime.now(ZoneId.of("UTC"));
         details.add(OrderDetail.builder()
                 .orderID(id)
                 .id(id.toString().concat("2"))
                 .message("VERIFIED")
-                .orderStatus(OrderStatus.PENDING)
+                .orderStatus(OrderStatus.WAITING_FOR_PAYMENT)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build());
     }
@@ -110,8 +120,8 @@ public class Order {
                 .build();
     }
 
-    public OrderDetail cancelOrder(Order order, String message){
-        if(details.peek().getOrderStatus() != OrderStatus.PENDING)
+    public OrderDetail cancelOrder(String message){
+        if(details.peek().getOrderStatus() != OrderStatus.PENDING || details.peek().getOrderStatus() != OrderStatus.WAITING_FOR_PAYMENT)
             throw new OrderDomainException("NOT IN CORRECT STATE FOR CANCEL ORDER");
         return OrderDetail.builder()
                 .orderID(id)
@@ -123,7 +133,7 @@ public class Order {
 
     }
 
-    private void initializeOrderItems(){
+    public void initializeOrderItems(){
         int orderItemID = 1;
         for(OrderItem orderItem : items){
             orderItem.initializeOrderItem(orderItemID);

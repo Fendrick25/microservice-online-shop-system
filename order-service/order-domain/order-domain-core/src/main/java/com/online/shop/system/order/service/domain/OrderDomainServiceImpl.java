@@ -13,6 +13,7 @@ public class OrderDomainServiceImpl implements OrderDomainService{
 
     @Override
     public void orderVerified(Order order) {
+        order.initializeOrderItems();
         order.verifyOrder();
     }
 
@@ -43,6 +44,6 @@ public class OrderDomainServiceImpl implements OrderDomainService{
 
     @Override
     public OrderDetail orderCancelled(Order order, String message) {
-        return order.cancelOrder(order, message);
+        return order.cancelOrder(message);
     }
 }
