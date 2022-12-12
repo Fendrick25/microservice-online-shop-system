@@ -8,14 +8,15 @@ import com.online.shop.system.product.service.domain.dto.create.response.PagingR
 import com.online.shop.system.product.service.domain.dto.create.response.ProductReviewResponse;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 public interface ProductReviewApplicationService {
-    ProductReviewResponse createProductReview(@Validated CreateProductReview createProductRating);
-    ProductReviewResponse updateProductReview(@Validated UpdateProductReview updateProductReview);
-    GetProductReviewResponse getProductReview(@Validated Integer productReviewID);
-    PagingResponse getProductReviewByProductID(@Validated UUID productID, int page, int size);
-    PagingResponse getProductReviewByProductIDAndRating(@Validated UUID productID, int rating, int page, int size);
+    ProductReviewResponse createProductReview(@Valid CreateProductReview createProductRating);
+    ProductReviewResponse updateProductReview(@Valid UpdateProductReview updateProductReview);
+    GetProductReviewResponse getProductReview(@Valid Integer productReviewID);
+    PagingResponse getProductReviewByProductID(@Valid UUID productID, int page, int size);
+    PagingResponse getProductReviewByProductIDAndRating(@Valid UUID productID, int rating, int page, int size);
 
 }
 

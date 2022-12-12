@@ -8,10 +8,12 @@ import com.online.shop.system.user.service.domain.dto.create.response.UserAddres
 import com.online.shop.system.user.service.domain.dto.create.response.UserIDResponse;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+
 
 public interface UserApplicationService {
-    UserIDResponse createUser(@Validated CreateUser createUser);
-    UserAddressResponse addAddress(@Validated CreateAddress createAddress);
-    UserAddressResponse updateAddress(@Validated UpdateAddress updateAddress);
+    UserIDResponse createUser(@Valid CreateUser createUser);
+    UserAddressResponse addAddress(@Valid CreateAddress createAddress);
+    UserAddressResponse updateAddress(@Valid UpdateAddress updateAddress);
     AddressIDResponse deleteAddress(Integer addressID);
 }

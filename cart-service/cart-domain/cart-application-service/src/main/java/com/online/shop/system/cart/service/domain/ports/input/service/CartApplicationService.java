@@ -8,14 +8,14 @@ import com.online.shop.system.cart.service.domain.dto.create.response.GetCartRes
 import com.online.shop.system.cart.service.domain.dto.message.CartOrderResponse;
 import com.online.shop.system.cart.service.domain.dto.message.CartRequest;
 import com.online.shop.system.cart.service.domain.dto.message.User;
-import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 public interface CartApplicationService {
     void createCart(User user);
-    CartIDResponse addCartItem(@Validated AddCartItem addCartItem);
-    CartIDResponse updateCartItem(@Validated UpdateCartItem updateCartItem);
+    CartIDResponse addCartItem(@Valid AddCartItem addCartItem);
+    CartIDResponse updateCartItem(@Valid UpdateCartItem updateCartItem);
     void emptyCart(UUID cartID);
     void deleteCartItem(Integer cartItemID);
     GetCartResponse getCart(UUID userID);

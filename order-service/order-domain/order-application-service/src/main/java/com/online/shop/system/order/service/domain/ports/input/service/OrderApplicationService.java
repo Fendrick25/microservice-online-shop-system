@@ -10,15 +10,16 @@ import com.online.shop.system.order.service.domain.dto.create.response.GetOrderR
 import com.online.shop.system.order.service.domain.dto.message.CartOrderResponse;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 public interface OrderApplicationService {
-    CreateOrderResponse requestOrder(@Validated CreateOrder createOrder);
+    CreateOrderResponse requestOrder(@Valid CreateOrder createOrder);
     void createOrder(CartOrderResponse cartOrderResponse);
     GetOrderResponse getOrder(UUID orderID);
-    void orderFinished(@Validated UpdateOrderDetail updateOrderDetail);
-    void orderCancelled(@Validated UpdateOrderDetail updateOrderDetail);
+    void orderFinished(@Valid UpdateOrderDetail updateOrderDetail);
+    void orderCancelled(@Valid UpdateOrderDetail updateOrderDetail);
     PagingResponse getAllOrder(UUID userID, int page, int size);
-    PagingResponse getOrderByDate(@Validated GetOrderByDate getOrderByDate, int page, int size);
-    PagingResponse getOrderByStatus(@Validated GetOrderByStatus getOrderByStatus, int page, int size);
+    PagingResponse getOrderByDate(@Valid GetOrderByDate getOrderByDate, int page, int size);
+    PagingResponse getOrderByStatus(@Valid GetOrderByStatus getOrderByStatus, int page, int size);
 }
