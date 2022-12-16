@@ -11,11 +11,18 @@
       }
     },
     {
+      "name": "userID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
       "name": "paymentStatus",
       "type": {
         "type": "enum",
         "name": "PaymentStatus",
-        "symbols": ["WAITING_FOR_PAYMENT", "CANCELLED"]
+        "symbols": ["WAITING_FOR_PAYMENT", "PAID", "CANCELLED"]
       }
     }
   ]

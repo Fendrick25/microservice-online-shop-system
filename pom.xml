@@ -14,6 +14,7 @@
         <module>user-service</module>
         <module>cart-service</module>
         <module>order-service</module>
+        <module>payment-service</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -171,6 +172,16 @@
             <dependency>
                 <groupId>com.online.shop.system</groupId>
                 <artifactId>order-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>payment-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>payment-application-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

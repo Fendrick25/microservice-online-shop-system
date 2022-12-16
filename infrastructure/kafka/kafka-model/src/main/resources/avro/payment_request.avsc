@@ -11,6 +11,13 @@
       }
     },
     {
+      "name": "userID",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
       "name": "price",
       "type": {
         "type": "bytes",
@@ -24,7 +31,7 @@
       "type": {
         "type": "enum",
         "name": "PaymentStatus",
-        "symbols": ["WAITING_FOR_PAYMENT", "CANCELLED"]
+        "symbols": ["WAITING_FOR_PAYMENT", "PAID", "CANCELLED"]
       }
     }
   ]
