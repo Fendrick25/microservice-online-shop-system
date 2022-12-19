@@ -35,13 +35,13 @@ public class OrderController {
     }
 
     @PostMapping("/finish")
-    public ResponseEntity<?> finishOrder(@RequestBody UpdateOrderDetail updateOrderDetail){
+    public ResponseEntity<Void> finishOrder(@RequestBody UpdateOrderDetail updateOrderDetail){
         orderApplicationService.orderFinished(updateOrderDetail);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/cancel")
-    public ResponseEntity<?> cancelOrder(@RequestBody UpdateOrderDetail updateOrderDetail){
+    public ResponseEntity<Void> cancelOrder(@RequestBody UpdateOrderDetail updateOrderDetail){
         orderApplicationService.orderCancelled(updateOrderDetail);
         return new ResponseEntity<>(HttpStatus.OK);
     }

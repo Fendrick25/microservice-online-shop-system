@@ -65,9 +65,10 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
         orderDomainService.orderVerified(orderUpdated);
         UUID id = orderRepository.updateOrder(orderUpdated);
         paymentMessagePublisher.requestPayment(PaymentRequest.builder()
+                        .userID(orderUpdated.getUserID())
                         .orderID(id)
                         .price(cartOrderResponse.getOrder().getTotalPrice())
-                        .orderStatus(orderUpdated.getDetails().peek().getOrderStatus())
+                        .orderStatus(OrderStatus.WAITING_FOR_PAYMENT)
                 .build());
         log.info("Order with id: {} updated", id);
     }
@@ -89,9 +90,11 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
     @Override
     public void orderCancelled(UpdateOrderDetail updateOrderDetail) {
         Order order = orderRepository.getOrder(updateOrderDetail.getOrderID());
+        System.out.println(order.getDetails().peek().getOrderStatus());
         OrderDetail orderDetail = orderDomainService.orderCancelled(order, updateOrderDetail.getMessage());
         orderRepository.updateOrderDetail(orderDetail);
         paymentMessagePublisher.cancelPayment(OrderCancelledEvent.builder()
+                        .userID(order.getUserID())
                         .orderID(order.getId())
                         .orderStatus(orderDetail.getOrderStatus())
                 .build());

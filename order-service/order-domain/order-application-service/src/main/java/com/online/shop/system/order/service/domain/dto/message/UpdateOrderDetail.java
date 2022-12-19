@@ -1,9 +1,8 @@
 package com.online.shop.system.order.service.domain.dto.message;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.online.shop.system.order.service.domain.valueobject.OrderStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
@@ -13,10 +12,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UpdateOrderDetail {
     @NotNull
-    private UUID orderID;
+    private final UUID orderID;
     @NotNull
-    private UUID userID;
+    private final UUID userID;
     @NotNull
-    private OrderStatus orderStatus;
+    private final OrderStatus orderStatus;
     private String message;
 }

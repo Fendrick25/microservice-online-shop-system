@@ -7,6 +7,7 @@ import com.online.shop.system.order.service.domain.ports.input.message.listener.
 import com.online.shop.system.order.service.messaging.mapper.OrderMessagingDataMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -23,6 +24,7 @@ public class UserMessageKafkaListener implements KafkaConsumer<UserAvroModel> {
     private final OrderMessagingDataMapper orderMessagingDataMapper;
 
     @Override
+    @KafkaListener(id = "${kafka-consumer-config.user-group-id}", topics = "${order-service.user-topic-name}")
     public void receive(@Payload List<UserAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,

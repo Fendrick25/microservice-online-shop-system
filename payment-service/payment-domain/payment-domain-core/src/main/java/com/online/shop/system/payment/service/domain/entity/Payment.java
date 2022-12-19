@@ -58,7 +58,7 @@ public class Payment {
             throw new PaymentDomainException("Price can't be null");
         if(price.equals(BigDecimal.ZERO))
             throw new PaymentDomainException("Price can't be zero");
-        if(price.compareTo(BigDecimal.ZERO) > 0)
+        if(price.compareTo(BigDecimal.ZERO) < 0)
             throw new PaymentDomainException("Price must be greater than zero");
     }
 }

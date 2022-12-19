@@ -186,6 +186,21 @@
             </dependency>
             <dependency>
                 <groupId>com.online.shop.system</groupId>
+                <artifactId>payment-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>payment-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>payment-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
                 <artifactId>kafka-config-data</artifactId>
                 <version>${project.version}</version>
             </dependency>

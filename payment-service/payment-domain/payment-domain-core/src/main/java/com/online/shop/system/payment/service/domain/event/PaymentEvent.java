@@ -8,7 +8,6 @@ import lombok.Getter;
 import java.util.UUID;
 
 @Getter
-@Builder
 @AllArgsConstructor
 public abstract class PaymentEvent {
     private final UUID paymentID;

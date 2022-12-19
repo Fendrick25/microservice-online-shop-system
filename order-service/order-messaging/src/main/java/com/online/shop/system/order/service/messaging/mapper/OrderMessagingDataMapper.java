@@ -13,6 +13,7 @@ import com.online.shop.system.order.service.domain.event.OrderRequestEvent;
 import com.online.shop.system.order.service.domain.valueobject.OrderStatus;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -60,6 +61,7 @@ public class OrderMessagingDataMapper {
 
     public PaymentRequestAvroModel paymentRequestToPaymentRequestAvroModel(PaymentRequest paymentRequest){
         return PaymentRequestAvroModel.newBuilder()
+                .setUserID(paymentRequest.getUserID().toString())
                 .setOrderID(paymentRequest.getOrderID().toString())
                 .setPrice(paymentRequest.getPrice())
                 .setPaymentStatus(PaymentStatus.valueOf(paymentRequest.getOrderStatus().name()))
@@ -68,7 +70,9 @@ public class OrderMessagingDataMapper {
 
     public PaymentRequestAvroModel orderCancelledEventToPaymentRequestAvroModel(OrderCancelledEvent orderCancelledEvent){
         return PaymentRequestAvroModel.newBuilder()
+                .setUserID(orderCancelledEvent.getOrderID().toString())
                 .setOrderID(orderCancelledEvent.getOrderID().toString())
+                .setPrice(BigDecimal.valueOf(0))
                 .setPaymentStatus(PaymentStatus.valueOf(orderCancelledEvent.getOrderStatus().name()))
                 .build();
     }

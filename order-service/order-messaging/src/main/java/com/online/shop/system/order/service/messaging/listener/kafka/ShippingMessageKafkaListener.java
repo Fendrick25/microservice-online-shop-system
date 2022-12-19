@@ -24,7 +24,7 @@ public class ShippingMessageKafkaListener implements KafkaConsumer<ShippingRespo
     private final OrderMessagingDataMapper orderMessagingDataMapper;
 
     @Override
-    @KafkaListener(groupId = "kafka-consumer-config.shipping-consumer-group-id", topics = "order.service-shipping-response-topic-name")
+    @KafkaListener(groupId = "kafka-consumer-config.shipping-consumer-group-id", topics = "order-service.shipping-response-topic-name")
     public void receive(@Payload List<ShippingResponseAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,

@@ -17,6 +17,7 @@ public class PaymentDomainServiceImpl implements PaymentDomainService{
     public PaymentPaidEvent payPayment(Payment payment, BigDecimal amount) {
         payment.pay(amount);
         return PaymentPaidEvent.builder()
+                .orderID(payment.getOrderID())
                 .paymentID(payment.getId())
                 .userID(payment.getUserID())
                 .paymentStatus(payment.getPaymentStatus())

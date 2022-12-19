@@ -36,7 +36,6 @@ public class CartRepositoryImpl implements CartRepository {
         Optional<CartItemEntity> optionalCartItemEntity = cartEntity.getCartItems().stream().filter(itemEntity -> itemEntity.getProductID().equals(cartItem.getProduct().getId()))
                 .findFirst();
         if(optionalCartItemEntity.isEmpty()){
-            System.out.println("Empty ");
             CartItemEntity cartItemEntity = cartDataAccessMapper.cartItemToCartItemEntity(cartItem);
             cartItemEntity.setCart(cartEntity);
             cartItemJpaRepository.save(cartItemEntity);

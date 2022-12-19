@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
-@Builder
 @AllArgsConstructor
 public abstract class PaymentResponse{
 

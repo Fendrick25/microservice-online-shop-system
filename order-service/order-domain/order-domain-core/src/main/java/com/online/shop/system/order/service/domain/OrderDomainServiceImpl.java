@@ -18,6 +18,11 @@ public class OrderDomainServiceImpl implements OrderDomainService{
     }
 
     @Override
+    public OrderDetail paymentCreated(Order order) {
+        return order.paymentCreated();
+    }
+
+    @Override
     public OrderDetail orderPaid(Order order) {
         return order.payOrder();
     }
@@ -45,5 +50,10 @@ public class OrderDomainServiceImpl implements OrderDomainService{
     @Override
     public OrderDetail orderCancelled(Order order, String message) {
         return order.cancelOrder(message);
+    }
+
+    @Override
+    public OrderDetail orderExpired(Order order) {
+        return order.expireOrder();
     }
 }

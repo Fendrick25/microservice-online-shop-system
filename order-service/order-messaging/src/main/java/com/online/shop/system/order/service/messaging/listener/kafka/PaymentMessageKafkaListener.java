@@ -2,7 +2,9 @@ package com.online.shop.system.order.service.messaging.listener.kafka;
 
 import com.online.shop.system.kafka.avro.model.PaymentResponseAvroModel;
 import com.online.shop.system.kafka.consumer.KafkaConsumer;
+import com.online.shop.system.order.service.domain.dto.message.UpdateOrderDetail;
 import com.online.shop.system.order.service.domain.ports.input.message.listener.PaymentMessageListener;
+import com.online.shop.system.order.service.domain.valueobject.OrderStatus;
 import com.online.shop.system.order.service.messaging.mapper.OrderMessagingDataMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +36,14 @@ public class PaymentMessageKafkaListener implements KafkaConsumer<PaymentRespons
                 partitions.toString(),
                 offsets.toString());
 
-        messages.forEach(paymentResponseAvroModel -> paymentMessageListener.orderPaid(orderMessagingDataMapper.paymentResponseAvroModelToUpdateOrderDetail(paymentResponseAvroModel)));
+        messages.forEach(paymentResponseAvroModel -> {
+            UpdateOrderDetail updateOrderDetail = orderMessagingDataMapper.paymentResponseAvroModelToUpdateOrderDetail(paymentResponseAvroModel);
+            if(paymentResponseAvroModel.getPaymentStatus().name().equals(OrderStatus.WAITING_FOR_PAYMENT.name()))
+                paymentMessageListener.paymentCreated(updateOrderDetail);
+            if(paymentResponseAvroModel.getPaymentStatus().name().equals(OrderStatus.PAID.name()))
+                paymentMessageListener.orderPaid(updateOrderDetail);
+            if(paymentResponseAvroModel.getPaymentStatus().name().equals(OrderStatus.EXPIRED.name()))
+                paymentMessageListener.orderExpired(updateOrderDetail);
+        });
     }
 }

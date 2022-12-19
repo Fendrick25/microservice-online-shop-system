@@ -41,7 +41,7 @@ public class Order {
         details = new Stack<>();
         details.add(OrderDetail.builder()
                         .orderID(id)
-                        .id(id.toString().concat("1"))
+                        .id(id.toString().concat("0"))
                         .message("WAITING FOR SYSTEM")
                         .orderStatus(OrderStatus.PENDING)
                         .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
@@ -53,11 +53,23 @@ public class Order {
         purchaseDate = ZonedDateTime.now(ZoneId.of("UTC"));
         details.add(OrderDetail.builder()
                 .orderID(id)
-                .id(id.toString().concat("2"))
+                .id(id.toString().concat("1"))
                 .message("VERIFIED")
-                .orderStatus(OrderStatus.WAITING_FOR_PAYMENT)
+                .orderStatus(OrderStatus.VERIFIED)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build());
+    }
+
+    public OrderDetail paymentCreated(){
+        if(details.peek().getOrderStatus() != OrderStatus.VERIFIED)
+            throw new OrderDomainException("NOT IN CORRECT STATE FOR PAYMENT CREATED");
+        return OrderDetail.builder()
+                .orderID(id)
+                .id(id.toString().concat("2"))
+                .orderStatus(OrderStatus.WAITING_FOR_PAYMENT)
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .message("Payment created")
+                .build();
     }
 
     public OrderDetail payOrder(){
@@ -121,7 +133,7 @@ public class Order {
     }
 
     public OrderDetail cancelOrder(String message){
-        if(details.peek().getOrderStatus() != OrderStatus.PENDING || details.peek().getOrderStatus() != OrderStatus.WAITING_FOR_PAYMENT)
+        if(details.peek().getOrderStatus() != OrderStatus.PENDING && details.peek().getOrderStatus() != OrderStatus.WAITING_FOR_PAYMENT)
             throw new OrderDomainException("NOT IN CORRECT STATE FOR CANCEL ORDER");
         return OrderDetail.builder()
                 .orderID(id)
@@ -131,6 +143,18 @@ public class Order {
                 .message("Order cancelled by " + message)
                 .build();
 
+    }
+
+    public OrderDetail expireOrder(){
+        if(details.peek().getOrderStatus() != OrderStatus.PENDING && details.peek().getOrderStatus() != OrderStatus.WAITING_FOR_PAYMENT)
+            throw new OrderDomainException("NOT IN CORRECT STATE FOR EXPIRE ORDER");
+        return OrderDetail.builder()
+                .orderID(id)
+                .id(id.toString().concat("9"))
+                .orderStatus(OrderStatus.EXPIRED)
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .message("Order expired")
+                .build();
     }
 
     public void initializeOrderItems(){

@@ -12,6 +12,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class PaymentRequest {
+    private UUID userID;
     private UUID orderID;
     private BigDecimal price;
     private OrderStatus orderStatus;
