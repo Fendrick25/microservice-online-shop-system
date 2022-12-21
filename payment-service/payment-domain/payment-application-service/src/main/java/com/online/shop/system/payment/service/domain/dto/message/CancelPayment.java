@@ -11,7 +11,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CancelPayment {
 
-    private UUID paymentID;
     private UUID orderID;
     private UUID userID;
 }

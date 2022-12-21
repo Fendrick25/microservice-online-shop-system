@@ -39,7 +39,7 @@ public class OrderEntity {
     private OrderAddress orderAddress;
 
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderDetailEntity> orderDetails;
 
 

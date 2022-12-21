@@ -43,7 +43,6 @@ public class CartRepositoryImpl implements CartRepository {
         }
 
         optionalCartItemEntity.get().setQuantity(optionalCartItemEntity.get().getQuantity() + cartItem.getQuantity());
-        cartItemJpaRepository.save(optionalCartItemEntity.get());
         return cartDataAccessMapper.cartEntityToCart(cartJpaRepository.getReferenceById(cartEntity.getId()));
     }
 
@@ -52,7 +51,7 @@ public class CartRepositoryImpl implements CartRepository {
     public CartItem updateCartItem(CartItem cartItem) {
         CartItemEntity cartItemEntity = findCartItem(cartItem.getId());
         cartItemEntity.setQuantity(cartItem.getQuantity());
-        return cartDataAccessMapper.cartItemEntityToCartItem(cartItemJpaRepository.save(cartItemEntity));
+        return cartDataAccessMapper.cartItemEntityToCartItem(cartItemEntity);
     }
 
     @Override
@@ -61,13 +60,11 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
-    @Transactional
     public Cart getCart(UUID userID) {
         return cartDataAccessMapper.cartEntityToCart(cartJpaRepository.findByUserID(userID));
     }
 
     @Override
-    @Transactional
     public void updateCart(Cart cart) {
         cart.getItems().forEach(this::updateCartItem);
     }

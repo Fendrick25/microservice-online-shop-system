@@ -90,7 +90,6 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
     @Override
     public void orderCancelled(UpdateOrderDetail updateOrderDetail) {
         Order order = orderRepository.getOrder(updateOrderDetail.getOrderID());
-        System.out.println(order.getDetails().peek().getOrderStatus());
         OrderDetail orderDetail = orderDomainService.orderCancelled(order, updateOrderDetail.getMessage());
         orderRepository.updateOrderDetail(orderDetail);
         paymentMessagePublisher.cancelPayment(OrderCancelledEvent.builder()

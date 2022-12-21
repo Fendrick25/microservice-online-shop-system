@@ -42,7 +42,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         productEntity.setDescription(product.getDescription());
         productEntity.setPrice(product.getPrice());
         productEntity.setQuantity(product.getQuantity());
-        return productDataAccessMapper.productEntityToProduct(productJpaRepository.save(productEntity));
+        return productDataAccessMapper.productEntityToProduct(productEntity);
     }
 
     @Override

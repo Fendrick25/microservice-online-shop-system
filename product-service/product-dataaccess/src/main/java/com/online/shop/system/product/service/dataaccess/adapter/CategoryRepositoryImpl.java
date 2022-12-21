@@ -30,7 +30,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     public Category updateCategory(Category category) {
         CategoryEntity categoryEntity = findCategory(category.getCategoryID());
         categoryEntity.setName(category.getName());
-        return categoryDataAccessMapper.categoryEntityToCategory(categoryJpaRepository.save(categoryEntity));
+        return categoryDataAccessMapper.categoryEntityToCategory(categoryEntity);
     }
 
     @Override

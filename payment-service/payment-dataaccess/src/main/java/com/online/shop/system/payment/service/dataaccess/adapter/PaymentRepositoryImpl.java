@@ -37,6 +37,11 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         paymentEntity.setPaymentStatus(payment.getPaymentStatus());
     }
 
+    @Override
+    public Payment getPaymentByOrderID(UUID orderID) {
+        return paymentDataAccessMapper.paymentEntityToPayment(paymentJpaRepository.findByOrderID(orderID));
+    }
+
     private PaymentEntity findPayment(UUID paymentID){
         return paymentJpaRepository.findById(paymentID).orElseThrow(() -> new ResourceNotFoundException("Payment not found"));
     }

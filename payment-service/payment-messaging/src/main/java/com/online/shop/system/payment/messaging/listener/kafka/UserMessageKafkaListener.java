@@ -1,8 +1,8 @@
-package com.online.shop.system.payment.messaing.listener.kafka;
+package com.online.shop.system.payment.messaging.listener.kafka;
 
 import com.online.shop.system.kafka.avro.model.UserAvroModel;
 import com.online.shop.system.kafka.consumer.KafkaConsumer;
-import com.online.shop.system.payment.messaing.mapper.PaymentMessagingDataMapper;
+import com.online.shop.system.payment.messaging.mapper.PaymentMessagingDataMapper;
 import com.online.shop.system.payment.service.domain.ports.input.message.listener.UserMessageListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -67,7 +67,6 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    @Transactional
     public PagingResponse getAllOrder(UUID userID, int page, int size) {
         Pageable paging = PageRequest.of(page - 1, size);
         Page<OrderEntity> pageOrders = orderJpaRepository.findByUserId(userID, paging);
@@ -106,7 +105,6 @@ public class OrderRepositoryImpl implements OrderRepository {
                 .build();
     }
 
-    @Transactional
     private OrderEntity findOrder(UUID orderID){
         return orderJpaRepository.findById(orderID).orElseThrow(() -> new ResourceNotFoundException("Order not found"));
     }

@@ -28,6 +28,7 @@ public class PaymentDomainServiceImpl implements PaymentDomainService{
     public PaymentCancelledEvent cancelPayment(Payment payment) {
         payment.cancel();
         return PaymentCancelledEvent.builder()
+                .orderID(payment.getOrderID())
                 .paymentID(payment.getId())
                 .userID(payment.getUserID())
                 .paymentStatus(payment.getPaymentStatus())

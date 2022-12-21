@@ -1,10 +1,9 @@
-package com.online.shop.system.payment.messaing.listener.kafka;
+package com.online.shop.system.payment.messaging.listener.kafka;
 
 import com.online.shop.system.kafka.avro.model.PaymentRequestAvroModel;
+import com.online.shop.system.kafka.avro.model.PaymentStatus;
 import com.online.shop.system.kafka.consumer.KafkaConsumer;
-import com.online.shop.system.payment.messaing.mapper.PaymentMessagingDataMapper;
-import com.online.shop.system.payment.service.domain.dto.message.CancelPayment;
-import com.online.shop.system.payment.service.domain.dto.message.PaymentRequest;
+import com.online.shop.system.payment.messaging.mapper.PaymentMessagingDataMapper;
 import com.online.shop.system.payment.service.domain.ports.input.message.listener.OrderMessageListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +36,12 @@ public class OrderMessageKafkaListener implements KafkaConsumer<PaymentRequestAv
                 partitions.toString(),
                 offsets.toString());
 
-        messages.forEach(paymentRequestAvroModel -> orderMessageListener.createPayment(paymentMessagingDataMapper.paymentRequestAvroModelToPaymentRequest(paymentRequestAvroModel)));
+        messages.forEach(paymentRequestAvroModel -> {
+                    if(paymentRequestAvroModel.getPaymentStatus().equals(PaymentStatus.WAITING_FOR_PAYMENT))
+                        orderMessageListener.createPayment(paymentMessagingDataMapper.paymentRequestAvroModelToPaymentRequest(paymentRequestAvroModel));
+                    if(paymentRequestAvroModel.getPaymentStatus().equals(PaymentStatus.CANCELLED))
+                        orderMessageListener.cancelPayment(paymentMessagingDataMapper.paymentRequestAvroModelToCancelPayment(paymentRequestAvroModel));
+                });
+
     }
 }

@@ -160,7 +160,7 @@ public class Order {
     public void initializeOrderItems(){
         int orderItemID = 1;
         for(OrderItem orderItem : items){
-            orderItem.initializeOrderItem(orderItemID);
+            orderItem.initializeOrderItem(orderItemID++);
         }
 
     }

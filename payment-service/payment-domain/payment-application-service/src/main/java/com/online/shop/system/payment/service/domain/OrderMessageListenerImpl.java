@@ -37,7 +37,7 @@ public class OrderMessageListenerImpl implements OrderMessageListener {
 
     @Override
     public void cancelPayment(CancelPayment cancelPayment) {
-        Payment payment = paymentRepository.getPayment(cancelPayment.getPaymentID());
+        Payment payment = paymentRepository.getPaymentByOrderID(cancelPayment.getOrderID());
         PaymentCancelledEvent paymentCancelledEvent = paymentDomainService.cancelPayment(payment);
         paymentRepository.updatePayment(payment);
         orderMessagePublisher.paymentCancelled(paymentCancelledEvent);

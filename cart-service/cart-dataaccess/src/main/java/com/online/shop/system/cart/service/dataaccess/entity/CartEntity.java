@@ -20,6 +20,6 @@ public class CartEntity {
     @Column(unique = true)
     private UUID userID;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CartItemEntity> cartItems;
 }

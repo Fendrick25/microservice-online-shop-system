@@ -8,4 +8,5 @@ public interface PaymentRepository {
     Payment createPayment(Payment payment);
     Payment getPayment(UUID paymentID);
     void updatePayment(Payment payment);
+    Payment getPaymentByOrderID(UUID orderID);
 }

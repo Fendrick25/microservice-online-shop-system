@@ -1,9 +1,9 @@
-package com.online.shop.system.payment.messaing.publisher;
+package com.online.shop.system.payment.messaging.publisher;
 
 import com.online.shop.system.kafka.avro.model.PaymentResponseAvroModel;
 import com.online.shop.system.kafka.producer.KafkaMessageHelper;
 import com.online.shop.system.kafka.producer.service.KafkaProducer;
-import com.online.shop.system.payment.messaing.mapper.PaymentMessagingDataMapper;
+import com.online.shop.system.payment.messaging.mapper.PaymentMessagingDataMapper;
 import com.online.shop.system.payment.service.domain.config.PaymentServiceConfigData;
 import com.online.shop.system.payment.service.domain.event.PaymentCancelledEvent;
 import com.online.shop.system.payment.service.domain.event.PaymentCreatedEvent;

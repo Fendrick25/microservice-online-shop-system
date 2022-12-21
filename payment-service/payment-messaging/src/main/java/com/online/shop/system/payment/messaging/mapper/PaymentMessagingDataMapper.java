@@ -1,8 +1,9 @@
-package com.online.shop.system.payment.messaing.mapper;
+package com.online.shop.system.payment.messaging.mapper;
 
 import com.online.shop.system.kafka.avro.model.PaymentRequestAvroModel;
 import com.online.shop.system.kafka.avro.model.PaymentResponseAvroModel;
 import com.online.shop.system.kafka.avro.model.UserAvroModel;
+import com.online.shop.system.payment.service.domain.dto.message.CancelPayment;
 import com.online.shop.system.payment.service.domain.dto.message.PaymentRequest;
 import com.online.shop.system.payment.service.domain.entity.User;
 import com.online.shop.system.payment.service.domain.event.PaymentCancelledEvent;
@@ -23,6 +24,13 @@ public class PaymentMessagingDataMapper {
                 .userID(UUID.fromString(paymentRequestAvroModel.getUserID()))
                 .price(paymentRequestAvroModel.getPrice())
                 .paymentStatus(PaymentStatus.valueOf(paymentRequestAvroModel.getPaymentStatus().name()))
+                .build();
+    }
+
+    public CancelPayment paymentRequestAvroModelToCancelPayment(PaymentRequestAvroModel paymentRequestAvroModel){
+        return CancelPayment.builder()
+                .orderID(UUID.fromString(paymentRequestAvroModel.getOrderID()))
+                .userID(UUID.fromString(paymentRequestAvroModel.getUserID()))
                 .build();
     }
 
