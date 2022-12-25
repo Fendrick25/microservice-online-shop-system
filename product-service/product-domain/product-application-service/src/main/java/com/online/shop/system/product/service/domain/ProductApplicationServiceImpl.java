@@ -2,12 +2,14 @@ package com.online.shop.system.product.service.domain;
 
 import com.online.shop.system.product.service.domain.dto.create.CheckProductStock;
 import com.online.shop.system.product.service.domain.dto.create.response.*;
+import com.online.shop.system.product.service.domain.dto.message.UpdateProductStock;
 import com.online.shop.system.product.service.domain.entity.Product;
 import com.online.shop.system.product.service.domain.ports.input.service.ProductApplicationService;
 import com.online.shop.system.product.service.domain.dto.create.CreateProduct;
 import com.online.shop.system.product.service.domain.dto.create.UpdateProduct;
 import com.online.shop.system.product.service.domain.mapper.ProductDataMapper;
 import com.online.shop.system.product.service.domain.ports.output.repository.ProductRepository;
+import com.online.shop.system.product.service.domain.valueobject.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -80,12 +82,10 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
     public List<CheckProductStockResponse> checkProductStock(List<CheckProductStock> checkProductStocks) {
         Map<UUID, String> checkedProducts = productRepository.checkProductStock(checkProductStocks.stream().map(productDataMapper::checkProductStockToProduct).collect(Collectors.toList()));
         List<CheckProductStockResponse> responses = new ArrayList<>();
-        checkedProducts.forEach((k, v) -> {
-            responses.add(CheckProductStockResponse.builder()
-                    .productID(k)
-                    .message(v)
-                    .build());
-        });
+        checkedProducts.forEach((k, v) -> responses.add(CheckProductStockResponse.builder()
+                .productID(k)
+                .message(v)
+                .build()));
 
         return responses;
     }
@@ -93,6 +93,32 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
     @Override
     public List<CartGetProductResponse> getProducts(List<UUID> productIDs) {
         return productRepository.getProducts(productIDs).stream().map(productDataMapper::productToCartGetProductResponse).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateProductStock(UpdateProductStock updateProductStock) {
+        if(updateProductStock.getOrderStatus().equals(OrderStatus.WAITING_FOR_PAYMENT)){
+            List<Product> products = updateProductStock.getProducts().stream().map(updateProduct -> {
+                Product product = productRepository.getProduct(updateProduct.getProductID());
+                product.setQuantity(product.getQuantity() - updateProduct.getQuantity());
+                log.info(String.valueOf(product.getQuantity()));
+                return product;
+            }).toList();
+
+            productRepository.updateProductStock(products);
+        }
+
+        if(updateProductStock.getOrderStatus().equals(OrderStatus.CANCELLED)){
+            List<Product> products = updateProductStock.getProducts().stream().map(updateProduct -> {
+                Product product = productRepository.getProduct(updateProduct.getProductID());
+                product.setQuantity(product.getQuantity() + updateProduct.getQuantity());
+                log.info(String.valueOf(product.getQuantity()));
+                return product;
+            }).toList();
+
+            productRepository.updateProductStock(products);
+        }
+
     }
 
 

@@ -36,7 +36,6 @@ public class CartApplicationServiceImpl implements CartApplicationService {
     private final CartDomainService cartDomainService;
     private final CartRepository cartRepository;
     private final CartDataMapper cartDataMapper;
-    private final OrderMessagePublisher orderMessagePublisher;
     private final WebClient.Builder webClient;
 
     @Override

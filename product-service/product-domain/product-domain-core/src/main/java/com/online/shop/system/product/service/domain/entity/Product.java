@@ -4,6 +4,7 @@ import com.online.shop.system.product.service.domain.valueobject.ProductStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -16,7 +17,8 @@ public class Product {
     private final String name;
     private final String description;
     private final BigDecimal price;
-    private final int quantity;
+    @Setter
+    private int quantity;
     private ProductStatus productStatus;
     private double rating;
     private int soldAmount;

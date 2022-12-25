@@ -9,6 +9,7 @@ import com.online.shop.system.product.service.domain.dto.create.response.PagingR
 import com.online.shop.system.product.service.domain.entity.Product;
 import com.online.shop.system.product.service.domain.ports.output.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ProductRepositoryImpl implements ProductRepository {
 
     private final ProductJpaRepository productJpaRepository;
@@ -103,6 +105,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public List<Product> getProducts(List<UUID> productIDs) {
         return productJpaRepository.findByIdIn(productIDs).stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateProductStock(List<Product> products) {
+        List<ProductEntity> productEntities = products.stream().map(productDataAccessMapper::productToProductEntity).toList();
+        productJpaRepository.saveAll(productEntities);
     }
 
     private ProductEntity find(UUID productID){

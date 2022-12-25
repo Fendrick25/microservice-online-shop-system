@@ -3,6 +3,7 @@ package com.online.shop.system.product.service.domain.ports.output.repository;
 import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
 import com.online.shop.system.product.service.domain.entity.Product;
 
+import javax.sound.sampled.Port;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -16,7 +17,7 @@ public interface ProductRepository {
     PagingResponse getProductByCategory(UUID categoryID, int page, int size);
     PagingResponse searchProduct(String productName, int page, int size);
     Map<UUID, String> checkProductStock(List<Product> products);
-
     List<Product> getProducts(List<UUID> productIDs);
+    void updateProductStock(List<Product> products);
 
 }

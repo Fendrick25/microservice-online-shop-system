@@ -4,6 +4,7 @@ import com.online.shop.system.product.service.domain.dto.create.CheckProductStoc
 import com.online.shop.system.product.service.domain.dto.create.CreateProduct;
 import com.online.shop.system.product.service.domain.dto.create.UpdateProduct;
 import com.online.shop.system.product.service.domain.dto.create.response.*;
+import com.online.shop.system.product.service.domain.dto.message.UpdateProductStock;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
@@ -19,6 +20,6 @@ public interface ProductApplicationService {
     PagingResponse getProductByCategory(@Valid UUID categoryID, int page, int size);
     PagingResponse searchProduct(@Valid String productName, int page, int size);
     List<CheckProductStockResponse> checkProductStock(List<CheckProductStock> checkProductStocks);
-
     List<CartGetProductResponse> getProducts(List<UUID> productIDs);
+    void updateProductStock(@Valid UpdateProductStock updateProductStock);
 }

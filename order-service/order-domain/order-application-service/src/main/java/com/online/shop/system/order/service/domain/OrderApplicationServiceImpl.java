@@ -9,6 +9,7 @@ import com.online.shop.system.order.service.domain.dto.create.response.PagingRes
 import com.online.shop.system.order.service.domain.dto.message.CartOrderResponse;
 import com.online.shop.system.order.service.domain.dto.message.PaymentRequest;
 import com.online.shop.system.order.service.domain.dto.message.UpdateOrderDetail;
+import com.online.shop.system.order.service.domain.dto.message.UpdateProductStock;
 import com.online.shop.system.order.service.domain.entity.Order;
 import com.online.shop.system.order.service.domain.entity.OrderDetail;
 import com.online.shop.system.order.service.domain.event.OrderCancelledEvent;
@@ -21,10 +22,15 @@ import com.online.shop.system.order.service.domain.ports.output.repository.Order
 import com.online.shop.system.order.service.domain.valueobject.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Validated
@@ -35,9 +41,9 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
     private final OrderDataMapper orderDataMapper;
     private final OrderRepository orderRepository;
     private final PaymentMessagePublisher paymentMessagePublisher;
-
     private final CartMessagePublisher cartMessagePublisher;
     private final OrderDomainService orderDomainService;
+    private final WebClient.Builder webClient;
 
     @Override
     public CreateOrderResponse requestOrder(CreateOrder createOrder) {
@@ -97,6 +103,21 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
                         .orderID(order.getId())
                         .orderStatus(orderDetail.getOrderStatus())
                 .build());
+
+        webClient.build().method(HttpMethod.PUT)
+                .uri("http://product-service/api/v1/products/stocks")
+                .body(BodyInserters.fromValue(UpdateProductStock.builder()
+                        .products(order.getItems().stream().map(orderItem ->
+                                UpdateProductStock.Product.builder()
+                                        .productID(orderItem.getProduct().getId())
+                                        .quantity(orderItem.getQuantity())
+                                        .build()).collect(Collectors.toList()))
+                        .orderStatus(OrderStatus.CANCELLED)
+                        .build()))
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block();
         log.info("Order with id: {} cancelled", order.getId());
     }
 

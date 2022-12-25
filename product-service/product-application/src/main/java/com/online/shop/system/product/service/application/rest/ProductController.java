@@ -4,6 +4,7 @@ import com.online.shop.system.product.service.domain.dto.create.CheckProductStoc
 import com.online.shop.system.product.service.domain.dto.create.CreateProduct;
 import com.online.shop.system.product.service.domain.dto.create.UpdateProduct;
 import com.online.shop.system.product.service.domain.dto.create.response.*;
+import com.online.shop.system.product.service.domain.dto.message.UpdateProductStock;
 import com.online.shop.system.product.service.domain.ports.input.service.ProductApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -67,5 +68,11 @@ public class ProductController {
     @GetMapping("/carts/info")
     public ResponseEntity<List<CartGetProductResponse>> getProductsInformation(@RequestBody List<UUID> productIDs){
         return new ResponseEntity<>(productApplicationService.getProducts(productIDs), HttpStatus.OK);
+    }
+
+    @PutMapping("/stocks")
+    public ResponseEntity<Void> updateProductStock(@RequestBody UpdateProductStock updateProductStock){
+        productApplicationService.updateProductStock(updateProductStock);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -20,8 +20,5 @@ public class OrderMessageListenerImpl implements OrderMessageListener {
         CartOrderResponse cartOrderResponse = cartApplicationService.requestCart(cartRequest);
         orderMessagePublisher.publish(cartOrderResponse);
         cartApplicationService.emptyCart(cartRequest.getCartID());
-        System.out.println(cartRequest.getOrderID());
-
-
     }
 }
