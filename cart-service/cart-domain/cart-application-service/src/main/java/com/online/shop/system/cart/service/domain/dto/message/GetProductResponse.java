@@ -2,7 +2,7 @@ package com.online.shop.system.cart.service.domain.dto.message;
 
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.UUID;
 

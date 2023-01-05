@@ -2,7 +2,7 @@ package com.online.shop.system.product.service.domain.dto.create;
 
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 @Getter
 @Builder

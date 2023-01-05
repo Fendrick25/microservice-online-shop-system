@@ -1,11 +1,11 @@
 package com.online.shop.system.order.service.dataaccess.entity;
 
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.JdbcTypeCode;
 
-import javax.persistence.Column;
+import jakarta.persistence.Column;
+import org.hibernate.type.SqlTypes;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -15,12 +15,11 @@ import java.util.Objects;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class OrderItemEntity {
 
     private Integer id;
 
-    @Type(type = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsobb")
     private ProductEntity product;
     private int quantity;

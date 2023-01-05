@@ -3,7 +3,7 @@ package com.online.shop.system.order.service.dataaccess.entity;
 import com.online.shop.system.order.service.domain.valueobject.OrderStatus;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 
 @Getter

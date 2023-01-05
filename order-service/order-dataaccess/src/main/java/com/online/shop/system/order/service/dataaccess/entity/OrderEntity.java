@@ -1,12 +1,12 @@
 package com.online.shop.system.order.service.dataaccess.entity;
 
 import com.online.shop.system.order.service.domain.valueobject.OrderAddress;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.JdbcTypeCode;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import org.hibernate.type.SqlTypes;
+
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -19,7 +19,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "orders")
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class OrderEntity {
 
     @Id
@@ -30,11 +29,11 @@ public class OrderEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity user;
 
-    @Type(type = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     private List<OrderItemEntity> orderItems;
 
-    @Type(type = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     private OrderAddress orderAddress;
 

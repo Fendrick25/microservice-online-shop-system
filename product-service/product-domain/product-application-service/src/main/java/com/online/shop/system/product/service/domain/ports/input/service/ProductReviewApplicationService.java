@@ -6,9 +6,8 @@ import com.online.shop.system.product.service.domain.dto.create.UpdateProductRev
 import com.online.shop.system.product.service.domain.dto.create.response.GetProductReviewResponse;
 import com.online.shop.system.product.service.domain.dto.create.response.PagingResponse;
 import com.online.shop.system.product.service.domain.dto.create.response.ProductReviewResponse;
-import org.springframework.validation.annotation.Validated;
+import jakarta.validation.Valid;
 
-import javax.validation.Valid;
 import java.util.UUID;
 
 public interface ProductReviewApplicationService {

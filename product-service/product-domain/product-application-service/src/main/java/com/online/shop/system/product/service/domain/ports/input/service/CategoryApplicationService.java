@@ -6,7 +6,7 @@ import com.online.shop.system.product.service.domain.dto.create.UpdateCategory;
 import com.online.shop.system.product.service.domain.dto.create.response.GetCategoryResponse;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 

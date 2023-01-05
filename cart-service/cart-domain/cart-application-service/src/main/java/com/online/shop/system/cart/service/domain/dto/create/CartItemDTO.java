@@ -3,7 +3,7 @@ package com.online.shop.system.cart.service.domain.dto.create;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter

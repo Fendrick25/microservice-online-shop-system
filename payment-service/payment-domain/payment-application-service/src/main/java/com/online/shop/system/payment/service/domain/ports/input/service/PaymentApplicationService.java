@@ -5,7 +5,7 @@ import com.online.shop.system.payment.service.domain.dto.request.PayOrder;
 import com.online.shop.system.payment.service.domain.dto.request.response.PayOrderResponse;
 import com.online.shop.system.payment.service.domain.entity.Payment;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface PaymentApplicationService {
     PayOrderResponse payOrder(@Valid PayOrder payOrder);

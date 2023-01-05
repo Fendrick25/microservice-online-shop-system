@@ -9,7 +9,7 @@ import com.online.shop.system.cart.service.domain.dto.message.CartOrderResponse;
 import com.online.shop.system.cart.service.domain.dto.message.CartRequest;
 import com.online.shop.system.cart.service.domain.dto.message.User;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.UUID;
 
 public interface CartApplicationService {

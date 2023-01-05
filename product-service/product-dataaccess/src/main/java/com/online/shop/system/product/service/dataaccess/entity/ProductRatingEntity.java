@@ -2,7 +2,7 @@ package com.online.shop.system.product.service.dataaccess.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Getter
 @Setter

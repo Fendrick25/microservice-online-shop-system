@@ -3,7 +3,7 @@ package com.online.shop.system.user.service.dataaccess.entity;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;

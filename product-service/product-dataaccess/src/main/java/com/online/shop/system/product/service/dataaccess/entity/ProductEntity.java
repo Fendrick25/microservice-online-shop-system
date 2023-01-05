@@ -3,7 +3,7 @@ package com.online.shop.system.product.service.dataaccess.entity;
 import com.online.shop.system.product.service.domain.valueobject.ProductStatus;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;

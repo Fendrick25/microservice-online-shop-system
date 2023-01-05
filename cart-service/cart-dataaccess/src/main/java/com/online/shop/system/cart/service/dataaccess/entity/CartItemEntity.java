@@ -2,7 +2,7 @@ package com.online.shop.system.cart.service.dataaccess.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.UUID;
 
 @Getter

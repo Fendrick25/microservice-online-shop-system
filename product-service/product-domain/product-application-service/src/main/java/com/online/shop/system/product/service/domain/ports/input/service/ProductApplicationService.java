@@ -5,9 +5,7 @@ import com.online.shop.system.product.service.domain.dto.create.CreateProduct;
 import com.online.shop.system.product.service.domain.dto.create.UpdateProduct;
 import com.online.shop.system.product.service.domain.dto.create.response.*;
 import com.online.shop.system.product.service.domain.dto.message.UpdateProductStock;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 

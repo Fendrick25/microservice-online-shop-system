@@ -10,7 +10,7 @@ import com.online.shop.system.order.service.domain.dto.create.response.GetOrderR
 import com.online.shop.system.order.service.domain.dto.message.CartOrderResponse;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.UUID;
 
 public interface OrderApplicationService {

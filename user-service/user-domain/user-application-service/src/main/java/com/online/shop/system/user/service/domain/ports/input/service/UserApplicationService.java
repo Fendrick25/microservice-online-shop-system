@@ -8,7 +8,7 @@ import com.online.shop.system.user.service.domain.dto.create.response.UserAddres
 import com.online.shop.system.user.service.domain.dto.create.response.UserIDResponse;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 
 public interface UserApplicationService {

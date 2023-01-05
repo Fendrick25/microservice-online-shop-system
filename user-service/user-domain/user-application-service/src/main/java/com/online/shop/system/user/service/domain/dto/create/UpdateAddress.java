@@ -4,7 +4,7 @@ package com.online.shop.system.user.service.domain.dto.create;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
